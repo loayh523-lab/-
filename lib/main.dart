@@ -59,7 +59,7 @@ class _MainShellState extends State<MainShell> {
     _MenuItem('مواقيت الصلاة', Icons.access_time_rounded),
     _MenuItem('القبلة', Icons.explore_rounded),
     _MenuItem('التقويم الهجري', Icons.calendar_month_rounded),
-    _MenuItem('الأعمال والعبادات', Icons.auto_awesome_rounded),
+    _MenuItem('الأعمال والعبادات', Icons.check_circle_outline_rounded),
     _MenuItem('المناسبات والمواسم', Icons.event_rounded),
     _MenuItem('الصوتيات', Icons.headphones_rounded),
     _MenuItem('أسماء الله الحسنى', Icons.auto_awesome_rounded),
@@ -404,6 +404,27 @@ class CatalogGroup {
   final List<String> items;
 }
 
+IconData _catalogIconForGroup(String title) {
+  if (title.contains('الصحيفة')) return Icons.menu_book_rounded;
+  if (title.contains('المناجيات')) return Icons.volunteer_activism_rounded;
+  if (title.contains('رمضان') || title.contains('الأيام') || title.contains('الأشهر')) {
+    return Icons.calendar_month_rounded;
+  }
+  if (title.contains('المهدي') || title.contains('الفرج')) return Icons.auto_awesome_rounded;
+  if (title.contains('الصلاة') || title.contains('اليومية')) return Icons.wb_sunny_outlined;
+  if (title.contains('الرزق') || title.contains('الحوائج') || title.contains('الشدائد')) {
+    return Icons.favorite_border_rounded;
+  }
+  if (title.contains('التوبة') || title.contains('الأخلاق') || title.contains('العبادة')) {
+    return Icons.volunteer_activism_outlined;
+  }
+  if (title.contains('أهل البيت') || title.contains('المعصومين') || title.contains('الزيارات')) {
+    return Icons.account_balance_rounded;
+  }
+  if (title.contains('المشهورة') || title.contains('العامة')) return Icons.auto_awesome_rounded;
+  return Icons.menu_book_rounded;
+}
+
 class CatalogPage extends StatefulWidget {
   const CatalogPage({super.key, required this.title, required this.subtitle, required this.groups});
   final String title;
@@ -445,9 +466,9 @@ class _CatalogPageState extends State<CatalogPage> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
           const Text('مِيثَاقُ المُؤْمِنِ', style: TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
           const SizedBox(height: 14),
-          Text(title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900)),
+          Text(widget.title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900)),
           const SizedBox(height: 8),
-          Text(subtitle, style: const TextStyle(color: Color(0xFFD2DFD6), height: 1.7, fontSize: 13)),
+          Text(widget.subtitle, style: const TextStyle(color: Color(0xFFD2DFD6), height: 1.7, fontSize: 13)),
           const SizedBox(height: 18),
           Container(height: 3, width: 58, decoration: BoxDecoration(color: appGold, borderRadius: BorderRadius.circular(8))),
         ]),
@@ -526,14 +547,24 @@ class _CatalogPageState extends State<CatalogPage> {
                 child: Material(
                   color: Colors.transparent,
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    leading: Container(
+                      width: 38,
+                      height: 38,
+                      decoration: BoxDecoration(
+                        color: appSurfaceLight,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: appGold.withValues(alpha: .14)),
+                      ),
+                      child: Icon(_catalogIconForGroup(group.title), color: appGold, size: 19),
+                    ),
                     title: Text(group.items[i], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.5)),
                     trailing: const Icon(Icons.chevron_left_rounded, color: appMuted),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (BuildContext context) => PlaceholderDetailPage(
                           title: group.items[i],
-                          section: title,
+                          section: widget.title,
                         ),
                       ),
                     ),
@@ -669,15 +700,42 @@ class QuranDesignPage extends StatelessWidget {
   );
 }
 
-class AsmaDesignPage extends StatelessWidget {
+class AsmaDesignPage extends StatefulWidget {
   const AsmaDesignPage({super.key});
 
   @override
+  State<AsmaDesignPage> createState() => _AsmaDesignPageState();
+}
+
+class _AsmaDesignPageState extends State<AsmaDesignPage> {
+  String searchQuery = '';
+
+  static const List<String> names = <String>[
+    'الله', 'الرحمن', 'الرحيم', 'الملك', 'القدوس', 'السلام', 'المؤمن',
+    'المهيمن', 'العزيز', 'الجبار', 'المتكبر', 'الخالق', 'البارئ', 'المصور',
+    'الغفار', 'القهار', 'الوهاب', 'الرزاق', 'الفتاح', 'العليم', 'القابض',
+    'الباسط', 'الخافض', 'الرافع', 'المعز', 'المذل', 'السميع', 'البصير',
+    'الحكم', 'العدل', 'اللطيف', 'الخبير', 'الحليم', 'العظيم', 'الغفور',
+    'الشكور', 'العلي', 'الكبير', 'الحفيظ', 'المقيت', 'الحسيب', 'الجليل',
+    'الكريم', 'الرقيب', 'المجيب', 'الواسع', 'الحكيم', 'الودود', 'المجيد',
+    'الباعث', 'الشهيد', 'الحق', 'الوكيل', 'القوي', 'المتين', 'الولي',
+    'الحميد', 'المحصي', 'المبدئ', 'المعيد', 'المحيي', 'المميت', 'الحي',
+    'القيوم', 'الواجد', 'الماجد', 'الواحد', 'الصمد', 'القادر', 'المقتدر',
+    'المقدم', 'المؤخر', 'الأول', 'الآخر', 'الظاهر', 'الباطن', 'الوالي',
+    'المتعالي', 'البر', 'التواب', 'المنتقم', 'العفو', 'الرؤوف', 'مالك الملك',
+    'ذو الجلال والإكرام', 'المقسط', 'الجامع', 'الغني', 'المغني', 'المانع',
+    'الضار', 'النافع', 'النور', 'الهادي', 'البديع', 'الباقي', 'الوارث',
+    'الرشيد', 'الصبور',
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    const List<String> previewNames = <String>[
-      'الله', 'الرحمن', 'الرحيم', 'الملك', 'القدوس', 'السلام',
-      'المؤمن', 'المهيمن', 'العزيز', 'الجبار', 'المتكبر', 'الخالق',
+    final String query = searchQuery.trim();
+    final List<int> visibleIndexes = <int>[
+      for (int i = 0; i < names.length; i++)
+        if (query.isEmpty || names[i].contains(query)) i,
     ];
+
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
       children: <Widget>[
@@ -692,71 +750,197 @@ class AsmaDesignPage extends StatelessWidget {
             ),
             border: Border.all(color: appGold.withValues(alpha: .28)),
           ),
-          child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-            Icon(Icons.auto_awesome_rounded, color: appGold, size: 30),
-            SizedBox(height: 14),
-            Text('أسماء الله الحسنى', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
-            SizedBox(height: 8),
-            Text('تأمّل في الأسماء الحسنى وتعرّف إلى معانيها في واجهة هادئة.',
-              style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
-          ]),
-        ),
-        const SizedBox(height: 20),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(15), border: Border.all(color: appSurfaceLight)),
-          child: const Row(children: <Widget>[
-            Icon(Icons.search_rounded, color: appMuted, size: 21),
-            SizedBox(width: 10),
-            Expanded(child: Text('البحث عن اسم من الأسماء الحسنى', style: TextStyle(color: appMuted, fontSize: 12))),
-          ]),
-        ),
-        const SizedBox(height: 20),
-        Row(children: <Widget>[
-          const Expanded(child: _SectionTitle(title: 'فهرس الأسماء')),
-          Text('99 اسماً', style: TextStyle(color: appGold.withValues(alpha: .9), fontSize: 12, fontWeight: FontWeight.w800)),
-        ]),
-        const SizedBox(height: 12),
-        LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-          final int columns = constraints.maxWidth >= 650 ? 4 : 3;
-          final double width = (constraints.maxWidth - 10 * (columns - 1)) / columns;
-          return Wrap(
-            spacing: 10,
-            runSpacing: 10,
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              for (int i = 0; i < 99; i++)
-                Container(
-                  width: width,
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                  decoration: BoxDecoration(
-                    color: appSurface,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: appGold.withValues(alpha: .18)),
-                  ),
-                  child: Column(children: <Widget>[
-                    Text('${i + 1}', style: const TextStyle(color: appMuted, fontSize: 10)),
-                    const SizedBox(height: 8),
-                    Text(i < previewNames.length ? previewNames[i] : 'الاسم لاحقاً',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: appGold, fontSize: 13, fontWeight: FontWeight.w900)),
-                    const SizedBox(height: 7),
-                    const Text('المعنى لاحقاً', textAlign: TextAlign.center,
-                      style: TextStyle(color: appMuted, fontSize: 9)),
-                  ]),
-                ),
+              Icon(Icons.auto_awesome_rounded, color: appGold, size: 30),
+              SizedBox(height: 14),
+              Text('أسماء الله الحسنى',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+              SizedBox(height: 8),
+              Text(
+                'فهرس الأسماء التسعة والتسعين، بتصميم موحّد يسهل تصفحه والبحث فيه.',
+                style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13),
+              ),
             ],
-          );
-        }),
+          ),
+        ),
+        const SizedBox(height: 18),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: appSurfaceLight),
+          ),
+          child: TextField(
+            textDirection: TextDirection.rtl,
+            onChanged: (String value) => setState(() => searchQuery = value),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'ابحث باسم من الأسماء الحسنى',
+              hintStyle: const TextStyle(color: appMuted, fontSize: 12),
+              prefixIcon: const Icon(Icons.search_rounded, color: appGold, size: 21),
+              suffixIcon: searchQuery.isEmpty
+                  ? const Icon(Icons.tune_rounded, color: appMuted, size: 19)
+                  : IconButton(
+                      tooltip: 'مسح البحث',
+                      onPressed: () => setState(() => searchQuery = ''),
+                      icon: const Icon(Icons.close_rounded, color: appMuted, size: 19),
+                    ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 18),
+        Row(
+          children: <Widget>[
+            const Expanded(child: _SectionTitle(title: 'فهرس الأسماء')),
+            Text(
+              'عرض ${visibleIndexes.length} من 99',
+              style: const TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w800),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        if (visibleIndexes.isEmpty)
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: const Column(
+              children: <Widget>[
+                Icon(Icons.search_off_rounded, color: appGold, size: 32),
+                SizedBox(height: 10),
+                Text('ما لقينا اسم مطابق', style: TextStyle(fontWeight: FontWeight.w800)),
+                SizedBox(height: 6),
+                Text('جرّب البحث بكلمة ثانية.',
+                    style: TextStyle(color: appMuted, fontSize: 12)),
+              ],
+            ),
+          )
+        else
+          LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final int columns = constraints.maxWidth >= 850
+                  ? 5
+                  : constraints.maxWidth >= 560
+                      ? 4
+                      : 3;
+              final double width =
+                  (constraints.maxWidth - 10 * (columns - 1)) / columns;
+              return Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: <Widget>[
+                  for (final int index in visibleIndexes)
+                    SizedBox(
+                      width: width,
+                      child: Material(
+                        color: appSurface,
+                        borderRadius: BorderRadius.circular(16),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(16),
+                          onTap: () => showModalBottomSheet<void>(
+                            context: context,
+                            backgroundColor: appSurface,
+                            showDragHandle: true,
+                            builder: (BuildContext sheetContext) => SafeArea(
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 56,
+                                      height: 56,
+                                      decoration: BoxDecoration(
+                                        color: appSurfaceLight,
+                                        borderRadius: BorderRadius.circular(18),
+                                        border: Border.all(color: appGold.withValues(alpha: .3)),
+                                      ),
+                                      child: const Icon(Icons.auto_awesome_rounded,
+                                          color: appGold, size: 26),
+                                    ),
+                                    const SizedBox(height: 14),
+                                    Text(
+                                      names[index],
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: appGold, fontSize: 24, fontWeight: FontWeight.w900),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      'الاسم ${index + 1} من 99',
+                                      style: const TextStyle(color: appMuted, fontSize: 12),
+                                    ),
+                                    const SizedBox(height: 14),
+                                    const Text(
+                                      'تُضاف المعاني والشروح الموثقة في مرحلة المحتوى.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: appMuted, height: 1.8, fontSize: 13),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          child: Container(
+                            constraints: const BoxConstraints(minHeight: 105),
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 13),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: appGold.withValues(alpha: .18)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text('${index + 1}',
+                                    style: const TextStyle(color: appMuted, fontSize: 10)),
+                                const SizedBox(height: 8),
+                                Text(
+                                  names[index],
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      color: appGold, fontSize: 13, fontWeight: FontWeight.w900),
+                                ),
+                                const SizedBox(height: 7),
+                                const Icon(Icons.touch_app_outlined, color: appMuted, size: 15),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
         const SizedBox(height: 20),
         Container(
           padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17)),
-          child: const Row(children: <Widget>[
-            Icon(Icons.info_outline_rounded, color: appGold),
-            SizedBox(width: 10),
-            Expanded(child: Text('هذه معاينة لتصميم الفهرس. تُستكمل الأسماء التسعة والتسعون ومعانيها الموثقة في مرحلة المحتوى.',
-              style: TextStyle(color: appMuted, fontSize: 11, height: 1.7))),
-          ]),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(17),
+            border: Border.all(color: appSurfaceLight),
+          ),
+          child: const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Icon(Icons.info_outline_rounded, color: appGold),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'الأسماء معروضة الآن كفهرس. معانيها ومصادرها تُراجع وتُضاف في مرحلة المحتوى.',
+                  style: TextStyle(color: appMuted, fontSize: 11, height: 1.7),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
