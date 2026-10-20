@@ -107,11 +107,7 @@ class _MainShellState extends State<MainShell> {
         CatalogGroup('الأسماء الحسنى', <String>['فهرس الأسماء الـ99', 'معاني الأسماء', 'الأسماء المفضلة']),
       ]),
       const FavoritesDesignPage(),
-      const CatalogPage(title: 'الإعدادات', subtitle: 'خصص تجربتك', groups: <CatalogGroup>[
-        CatalogGroup('التخصيص', <String>['المظهر الأخضر الزمردي', 'حجم الخط وطريقة العرض', 'اللغة واتجاه العرض']),
-        CatalogGroup('التنبيهات والصوت', <String>['تنبيهات الصلاة', 'الأذان والأصوات', 'التذكير بالأذكار']),
-        CatalogGroup('الموقع والتطبيق', <String>['المدينة وطريقة حساب المواقيت', 'عن التطبيق', 'المصادر والتوثيق']),
-      ]),
+      const SettingsDesignPage(),
     ];
 
     return Scaffold(
@@ -291,6 +287,128 @@ class CatalogPage extends StatelessWidget {
       ],
     ],
   );
+}
+
+class SettingsDesignPage extends StatelessWidget {
+  const SettingsDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.tune_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('الإعدادات', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('رتّب تجربة ميثاق المؤمن بالطريقة التي تناسبك.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'المظهر والتخصيص'),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
+        child: Column(children: <Widget>[
+          Row(children: <Widget>[
+            Container(
+              width: 46, height: 46,
+              decoration: BoxDecoration(color: appBackground, borderRadius: BorderRadius.circular(14), border: Border.all(color: appGold.withValues(alpha: .35))),
+              child: const Icon(Icons.palette_outlined, color: appGold),
+            ),
+            const SizedBox(width: 12),
+            const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text('الثيم الزمردي', style: TextStyle(fontWeight: FontWeight.w800)),
+              SizedBox(height: 4),
+              Text('الخلفية الداكنة مع اللمسات الذهبية', style: TextStyle(color: appMuted, fontSize: 11)),
+            ])),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(color: const Color(0xFF204B38), borderRadius: BorderRadius.circular(20)),
+              child: const Text('الحالي', style: TextStyle(color: Color(0xFFE6C783), fontSize: 10, fontWeight: FontWeight.w800)),
+            ),
+          ]),
+          const SizedBox(height: 18),
+          Row(children: <Widget>[
+            for (final Color color in const <Color>[Color(0xFF174B36), Color(0xFF234A69), Color(0xFF553A69), Color(0xFF6B4534)])
+              Expanded(child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                height: 38,
+                decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12), border: Border.all(color: appGold.withValues(alpha: .25))),
+                child: const Icon(Icons.lock_outline_rounded, color: Colors.white70, size: 15),
+              )),
+          ]),
+          const SizedBox(height: 9),
+          const Text('خيارات الألوان الأخرى تُضاف لاحقاً', style: TextStyle(color: appMuted, fontSize: 11)),
+        ]),
+      ),
+      const SizedBox(height: 20),
+      const _SectionTitle(title: 'إعدادات التطبيق'),
+      const SizedBox(height: 10),
+      for (final _SettingsOption option in const <_SettingsOption>[
+        _SettingsOption(Icons.language_rounded, 'اللغة واتجاه العرض', 'العربية • من اليمين إلى اليسار'),
+        _SettingsOption(Icons.text_fields_rounded, 'حجم الخط', 'ضبط القراءة حسب راحتك'),
+        _SettingsOption(Icons.notifications_none_rounded, 'تنبيهات الصلاة', 'تنظيم التذكير بمواقيت الصلاة'),
+        _SettingsOption(Icons.volume_up_outlined, 'الأذان والأصوات', 'إعدادات الصوت والتنبيهات'),
+        _SettingsOption(Icons.location_on_outlined, 'الموقع وطريقة الحساب', 'المدينة وإعدادات المواقيت'),
+      ])
+        Container(
+          margin: const EdgeInsets.only(bottom: 9),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            Container(
+              width: 42, height: 42,
+              decoration: BoxDecoration(color: appBackground, borderRadius: BorderRadius.circular(13)),
+              child: Icon(option.icon, color: appGold, size: 21),
+            ),
+            const SizedBox(width: 12),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text(option.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 4),
+              Text(option.subtitle, style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
+            ])),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
+      const SizedBox(height: 12),
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(18), border: Border.all(color: appSurfaceLight)),
+        child: const Row(children: <Widget>[
+          Icon(Icons.info_outline_rounded, color: appGold, size: 24),
+          SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            Text('عن ميثاق المؤمن', style: TextStyle(fontWeight: FontWeight.w800)),
+            SizedBox(height: 5),
+            Text('رفيق العبادة والإيمان', style: TextStyle(color: appMuted, fontSize: 12)),
+            SizedBox(height: 4),
+            Text('الإصدار الأولي • واجهات قيد التطوير', style: TextStyle(color: appMuted, fontSize: 10)),
+          ])),
+        ]),
+      ),
+    ],
+  );
+}
+
+class _SettingsOption {
+  const _SettingsOption(this.icon, this.title, this.subtitle);
+  final IconData icon;
+  final String title;
+  final String subtitle;
 }
 
 class FavoritesDesignPage extends StatelessWidget {
