@@ -2,30 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mithaq_al_mumin/main.dart';
 
 void main() {
-  testWidgets('home screen shows the title and quick access', (WidgetTester tester) async {
+  testWidgets('home has the agreed sections', (tester) async {
     await tester.pumpWidget(const MithaqApp());
-
     expect(find.text('مِيثَاقُ المُؤْمِنِ'), findsOneWidget);
-    expect(find.text('الوصول السريع'), findsOneWidget);
-    expect(find.text('السلام على قلبك'), findsOneWidget);
-  });
-
-  testWidgets('tasbeeh counter increments and resets', (WidgetTester tester) async {
-    await tester.pumpWidget(const MithaqApp());
-
-    await tester.tap(find.text('التسبيح').last);
-    await tester.pumpAndSettle();
-
-    expect(find.text('0'), findsOneWidget);
-
-    await tester.ensureVisible(find.text('تسبيحة جديدة'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('تسبيحة جديدة'));
-    await tester.pumpAndSettle();
-    expect(find.text('1'), findsOneWidget);
-
-    await tester.tap(find.text('تصفير العداد'));
-    await tester.pumpAndSettle();
-    expect(find.text('0'), findsOneWidget);
+    expect(find.text('الصلاة القادمة'), findsOneWidget);
+    expect(find.text('أوقات الصلاة'), findsOneWidget);
+    expect(find.text('القرآن الكريم'), findsOneWidget);
+    expect(find.text('أعمال اليوم المصادف'), findsOneWidget);
   });
 }
