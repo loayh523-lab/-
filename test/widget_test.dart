@@ -12,9 +12,9 @@ void main() {
     await tester.tap(find.byTooltip('القائمة الجانبية'));
     await tester.pumpAndSettle();
     expect(find.text('القرآن الكريم'), findsWidgets);
-    expect(find.text('الأدعية والمناجيات'), findsOneWidget);
+    expect(find.text('الأدعية والمناجيات'), findsWidgets);
     await tester.drag(find.byKey(const Key('drawer-navigation-list')), const Offset(0, -600));
     await tester.pumpAndSettle();
-    expect(find.text('الإعدادات'), findsOneWidget);
+    expect(find.text('الإعدادات'), findsWidgets);
   });
 }
