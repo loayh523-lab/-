@@ -142,14 +142,21 @@ class _MainShellState extends State<MainShell> {
                       child: const Icon(Icons.auto_awesome, color: appGold),
                     ),
                     const SizedBox(width: 12),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('مِيثَاقُ المُؤْمِنِ',
-                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
-                        SizedBox(height: 4),
-                        Text('رفيق العبادة والإيمان', style: TextStyle(color: appMuted, fontSize: 12)),
-                      ],
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('مِيثَاقُ المُؤْمِنِ',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
+                          SizedBox(height: 4),
+                          Text('رفيق العبادة والإيمان',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(color: appMuted, fontSize: 11)),
+                        ],
+                      ),
                     ),
                   ],
                 ),
