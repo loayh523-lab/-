@@ -98,10 +98,7 @@ class _MainShellState extends State<MainShell> {
       const DhikrDesignPage(),
       const PrayerDesignPage(),
       const CalendarDesignPage(),
-      const CatalogPage(title: 'المناسبات والمواسم', subtitle: 'دليل المواسم الإيمانية', groups: <CatalogGroup>[
-        CatalogGroup('المواسم', <String>['شهر رمضان المبارك', 'جدول الإمساك والإفطار', 'الأعمال اليومية لشهر رمضان', 'الحج والعمرة', 'دليل زيارة الأربعين']),
-        CatalogGroup('الأدلة', <String>['أحكام ومناسك الحج والعمرة', 'دليل الزائر', 'الإرشادات والخرائط']),
-      ]),
+      const OccasionsDesignPage(),
       const AudioDesignPage(),
       const CatalogPage(title: 'أسماء الله الحسنى', subtitle: 'تعرّف إلى الأسماء ومعانيها', groups: <CatalogGroup>[
         CatalogGroup('الأسماء الحسنى', <String>['فهرس الأسماء الـ99', 'معاني الأسماء', 'الأسماء المفضلة']),
@@ -285,6 +282,89 @@ class CatalogPage extends StatelessWidget {
         ),
         const SizedBox(height: 22),
       ],
+    ],
+  );
+}
+
+class OccasionsDesignPage extends StatelessWidget {
+  const OccasionsDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.event_available_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('المناسبات والمواسم', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('دليل المواسم الإيمانية والأعمال المرتبطة بالأيام المباركة.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'المواسم الإيمانية'),
+      const SizedBox(height: 12),
+      Container(
+        height: 150,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(22),
+          gradient: const LinearGradient(colors: <Color>[Color(0xFF244E3B), Color(0xFF13271E)]),
+          border: Border.all(color: appGold.withValues(alpha: .3)),
+        ),
+        child: const Row(children: <Widget>[
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Text('الموسم المبارك', style: TextStyle(color: appGold, fontSize: 12)),
+            SizedBox(height: 8),
+            Text('تهيّأ لأيام الطاعة', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+            SizedBox(height: 6),
+            Text('أعمال وأدعية وأدلة مرتبة', style: TextStyle(color: Color(0xFFD2DFD6), fontSize: 11)),
+          ])),
+          Icon(Icons.nights_stay_rounded, color: appGold, size: 58),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      for (final _SettingsOption option in const <_SettingsOption>[
+        _SettingsOption(Icons.nightlight_round, 'شهر رمضان المبارك', 'أعمال الشهر وأدعية الأيام والليالي'),
+        _SettingsOption(Icons.restaurant_outlined, 'الإمساك والإفطار', 'جدول الشهر ومواعيد الإمساك والإفطار'),
+        _SettingsOption(Icons.mosque_outlined, 'الحج والعمرة', 'دليل المناسك والإرشادات'),
+        _SettingsOption(Icons.directions_walk_rounded, 'دليل زيارة الأربعين', 'إرشادات الزائر والخدمات المهمة'),
+        _SettingsOption(Icons.calendar_month_rounded, 'أعمال الأيام المباركة', 'الأعمال المستحبة حسب المناسبة'),
+      ])
+        Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(18), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            Container(
+              width: 46, height: 46,
+              decoration: BoxDecoration(color: appBackground, borderRadius: BorderRadius.circular(14)),
+              child: Icon(option.icon, color: appGold, size: 22),
+            ),
+            const SizedBox(width: 12),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text(option.title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
+              const SizedBox(height: 5),
+              Text(option.subtitle, style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
+            ])),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
+      const SizedBox(height: 8),
+      const Text('الأدلة والخرائط والتوقيتات تُضاف في مرحلة الخدمات',
+        textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 11, height: 1.7)),
     ],
   );
 }
