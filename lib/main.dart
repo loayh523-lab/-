@@ -268,7 +268,14 @@ class CatalogPage extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   title: Text(group.items[i], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.5)),
                   trailing: const Icon(Icons.chevron_left_rounded, color: appMuted),
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => PlaceholderDetailPage(
+                        title: group.items[i],
+                        section: title,
+                      ),
+                    ),
+                  ),
                 ),
               ),
           ]),
@@ -276,6 +283,70 @@ class CatalogPage extends StatelessWidget {
         const SizedBox(height: 22),
       ],
     ],
+  );
+}
+
+class PlaceholderDetailPage extends StatelessWidget {
+  const PlaceholderDetailPage({super.key, required this.title, required this.section});
+  final String title;
+  final String section;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800))),
+    body: ListView(
+      padding: const EdgeInsets.all(18),
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            gradient: const LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+            ),
+            border: Border.all(color: appGold.withValues(alpha: .3)),
+          ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            const Icon(Icons.auto_awesome_rounded, color: appGold, size: 30),
+            const SizedBox(height: 18),
+            Text(section, style: const TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 8),
+            Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, height: 1.5)),
+            const SizedBox(height: 12),
+            const Text('مساحة مخصصة لهذا المحتوى ضمن تصميم ميثاق المؤمن.',
+              style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+          ]),
+        ),
+        const SizedBox(height: 20),
+        Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: appSurfaceLight),
+          ),
+          child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            Text('قيد استكمال المحتوى', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+            SizedBox(height: 8),
+            Text('التصميم الأساسي جاهز لهذه الصفحة. سيُضاف النص والمصادر والأدوات بعد اكتمال مرحلة تصميم الواجهات.',
+              style: TextStyle(color: appMuted, height: 1.9, fontSize: 13)),
+          ]),
+        ),
+        const SizedBox(height: 14),
+        OutlinedButton.icon(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_forward_rounded),
+          label: const Text('العودة إلى القسم'),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: appGold,
+            side: const BorderSide(color: appGold),
+            padding: const EdgeInsets.symmetric(vertical: 14),
+          ),
+        ),
+      ],
+    ),
   );
 }
 
