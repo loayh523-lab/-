@@ -1325,10 +1325,10 @@ class PlaceholderDetailPage extends StatelessWidget {
       title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
       actions: <Widget>[
-        IconButton(
+        const IconButton(
           tooltip: 'حفظ في المفضلة لاحقاً',
           onPressed: null,
-          icon: const Icon(Icons.bookmark_border_rounded, color: appGold),
+          icon: Icon(Icons.bookmark_border_rounded, color: appGold),
         ),
       ],
     ),
