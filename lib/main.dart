@@ -503,13 +503,14 @@ class _PrayerRow extends StatelessWidget {
       );
 }
 
-class _FeatureTile extends StatelessWidget {
-  const _FeatureTile({
+class _CategoryCard extends StatelessWidget {
+  const _CategoryCard({
     required this.icon,
     required this.title,
     required this.subtitle,
     required this.onTap,
   });
+
   final IconData icon;
   final String title;
   final String subtitle;
@@ -517,41 +518,47 @@ class _FeatureTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-        color: appSurface,
-        borderRadius: BorderRadius.circular(18),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(18),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: 46,
-                  height: 46,
-                  decoration: BoxDecoration(
-                    color: appSurfaceLight,
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(icon, color: appGold),
-                ),
-                const SizedBox(width: 13),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(title, style: const TextStyle(fontWeight: FontWeight.w800)),
-                      const SizedBox(height: 5),
-                      Text(subtitle, style: const TextStyle(color: appMuted, fontSize: 12)),
-                    ],
-                  ),
-                ),
-                const Icon(Icons.chevron_left_rounded, color: appMuted),
-              ],
-            ),
-          ),
+    color: appSurface,
+    borderRadius: BorderRadius.circular(20),
+    child: InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 132),
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: appSurfaceLight),
         ),
-      );
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: <Color>[Color(0xFF2B7657), appSurfaceLight],
+                ),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: appGold.withValues(alpha: .22)),
+              ),
+              child: Icon(icon, color: appGold, size: 21),
+            ),
+            const Spacer(),
+            const SizedBox(height: 16),
+            Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900)),
+            const SizedBox(height: 5),
+            Text(subtitle, maxLines: 2, overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
+          ],
+        ),
+      ),
+    ),
+  );
 }
 
 class SimplePage extends StatelessWidget {
