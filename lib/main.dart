@@ -404,14 +404,31 @@ class CatalogGroup {
   final List<String> items;
 }
 
-class CatalogPage extends StatelessWidget {
+class CatalogPage extends StatefulWidget {
   const CatalogPage({super.key, required this.title, required this.subtitle, required this.groups});
   final String title;
   final String subtitle;
   final List<CatalogGroup> groups;
 
   @override
-  Widget build(BuildContext context) => ListView(
+  State<CatalogPage> createState() => _CatalogPageState();
+}
+
+class _CatalogPageState extends State<CatalogPage> {
+  String searchQuery = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final List<CatalogGroup> visibleGroups = widget.groups
+        .map((CatalogGroup group) => CatalogGroup(
+              group.title,
+              group.items
+                  .where((String item) => item.contains(searchQuery.trim()))
+                  .toList(growable: false),
+            ))
+        .where((CatalogGroup group) => group.items.isNotEmpty)
+        .toList(growable: false);
+    return ListView(
     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
     children: <Widget>[
       Container(
@@ -437,26 +454,52 @@ class CatalogPage extends StatelessWidget {
       ),
       const SizedBox(height: 16),
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
         decoration: BoxDecoration(
           color: appSurface,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: appSurfaceLight),
         ),
-        child: Row(
-          children: <Widget>[
-            const Icon(Icons.search_rounded, color: appGold, size: 21),
-            const SizedBox(width: 11),
-            Expanded(
-              child: Text('ابحث داخل $title', maxLines: 1, overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: appMuted, fontSize: 13)),
-            ),
-            const Icon(Icons.tune_rounded, color: appMuted, size: 19),
-          ],
+        child: TextField(
+          textDirection: TextDirection.rtl,
+          onChanged: (String value) => setState(() => searchQuery = value),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: 'ابحث داخل ${widget.title}',
+            hintStyle: const TextStyle(color: appMuted, fontSize: 13),
+            prefixIcon: const Icon(Icons.search_rounded, color: appGold, size: 21),
+            suffixIcon: searchQuery.isEmpty
+                ? const Icon(Icons.tune_rounded, color: appMuted, size: 19)
+                : IconButton(
+                    tooltip: 'مسح البحث',
+                    onPressed: () => setState(() => searchQuery = ''),
+                    icon: const Icon(Icons.close_rounded, color: appMuted, size: 19),
+                  ),
+          ),
         ),
       ),
       const SizedBox(height: 22),
-      for (final CatalogGroup group in groups) ...<Widget>[
+      if (visibleGroups.isEmpty)
+        Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: appSurfaceLight),
+          ),
+          child: const Column(
+            children: <Widget>[
+              Icon(Icons.search_off_rounded, color: appGold, size: 32),
+              SizedBox(height: 12),
+              Text('ما لقينا نتيجة مطابقة', style: TextStyle(fontWeight: FontWeight.w800)),
+              SizedBox(height: 6),
+              Text('جرّب كلمة ثانية من اسم الدعاء أو الزيارة.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
+            ],
+          ),
+        ),
+      for (final CatalogGroup group in visibleGroups) ...<Widget>[
         Row(
           children: <Widget>[
             Expanded(child: Text(group.title,
@@ -503,6 +546,7 @@ class CatalogPage extends StatelessWidget {
       ],
     ],
   );
+  }
 }
 
 class QuranDesignPage extends StatelessWidget {
@@ -1971,21 +2015,32 @@ class QiblaDesignPage extends StatelessWidget {
       );
 }
 
-class PlaceholderDetailPage extends StatelessWidget {
+class PlaceholderDetailPage extends StatefulWidget {
   const PlaceholderDetailPage({super.key, required this.title, required this.section});
   final String title;
   final String section;
 
   @override
+  State<PlaceholderDetailPage> createState() => _PlaceholderDetailPageState();
+}
+
+class _PlaceholderDetailPageState extends State<PlaceholderDetailPage> {
+  int selectedTab = 0;
+  bool isSaved = false;
+
+  @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
+      title: Text(widget.title, maxLines: 1, overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
       actions: <Widget>[
-        const IconButton(
-          tooltip: 'حفظ في المفضلة لاحقاً',
-          onPressed: null,
-          icon: Icon(Icons.bookmark_border_rounded, color: appGold),
+        IconButton(
+          tooltip: isSaved ? 'إزالة من المفضلة' : 'حفظ في المفضلة',
+          onPressed: () => setState(() => isSaved = !isSaved),
+          icon: Icon(
+            isSaved ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+            color: appGold,
+          ),
         ),
       ],
     ),
@@ -2017,9 +2072,9 @@ class PlaceholderDetailPage extends StatelessWidget {
                 child: const Icon(Icons.auto_awesome_rounded, color: appGold, size: 25),
               ),
               const SizedBox(height: 20),
-              Text(section, style: const TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
+              Text(widget.section, style: const TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
               const SizedBox(height: 8),
-              Text(title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900, height: 1.5)),
+              Text(widget.title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900, height: 1.5)),
               const SizedBox(height: 12),
               const Text('صفحة المحتوى', style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
               const SizedBox(height: 18),
@@ -2045,11 +2100,29 @@ class PlaceholderDetailPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(17),
             border: Border.all(color: appSurfaceLight),
           ),
-          child: const Row(
+          child: Row(
             children: <Widget>[
-              Expanded(child: _DetailTab(label: 'النص', icon: Icons.menu_book_rounded, selected: true)),
-              Expanded(child: _DetailTab(label: 'المعاني', icon: Icons.notes_rounded)),
-              Expanded(child: _DetailTab(label: 'المصادر', icon: Icons.library_books_rounded)),
+              Expanded(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => setState(() => selectedTab = 0),
+                  child: _DetailTab(label: 'النص', icon: Icons.menu_book_rounded, selected: selectedTab == 0),
+                ),
+              ),
+              Expanded(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => setState(() => selectedTab = 1),
+                  child: _DetailTab(label: 'المعاني', icon: Icons.notes_rounded, selected: selectedTab == 1),
+                ),
+              ),
+              Expanded(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => setState(() => selectedTab = 2),
+                  child: _DetailTab(label: 'المصادر', icon: Icons.library_books_rounded, selected: selectedTab == 2),
+                ),
+              ),
             ],
           ),
         ),
@@ -2065,12 +2138,20 @@ class PlaceholderDetailPage extends StatelessWidget {
             children: <Widget>[
               const Icon(Icons.menu_book_rounded, color: appGold, size: 34),
               const SizedBox(height: 14),
-              const Text('سيُضاف النص المعتمد هنا', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 8),
-              const Text(
-                'نرتّب النص والتشكيل والشرح والمصدر قبل تفعيل المحتوى، حتى تكون القراءة واضحة ويمكن الرجوع إلى مصدر موثوق.',
+              Text(
+                <String>['سيُضاف النص المعتمد هنا', 'سيُضاف شرح المعاني هنا', 'ستُعرض المصادر الموثوقة هنا'][selectedTab],
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: appMuted, fontSize: 13, height: 1.9),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                <String>[
+                  'نرتّب النص والتشكيل قبل تفعيل المحتوى، حتى تكون القراءة واضحة.',
+                  'سيُصمّم عرض المعاني والشرح في هذه المساحة بعد توثيق المحتوى.',
+                  'ستظهر بيانات المصدر والكتاب والباب والموضع هنا بعد المراجعة.',
+                ][selectedTab],
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: appMuted, fontSize: 13, height: 1.9),
               ),
               const SizedBox(height: 22),
               for (final double width in <double>[.94, .82, .9, .68])
@@ -2114,7 +2195,7 @@ class PlaceholderDetailPage extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Text(
-          'التصميم فقط حالياً — ستُفعّل القراءة والحفظ والصوت بعد اكتمال جميع الواجهات.',
+          'هذه معاينة للواجهة؛ الحفظ هنا داخل الصفحة فقط، والمحتوى الفعلي يُضاف بعد اكتمال التصميم.',
           textAlign: TextAlign.center,
           style: TextStyle(color: appMuted, fontSize: 11, height: 1.8),
         ),
