@@ -470,6 +470,14 @@ class QuranDesignPage extends StatelessWidget {
         ]),
       ),
       const SizedBox(height: 18),
+      const _SectionTitle(title: 'إعدادات المواقيت'),
+      const SizedBox(height: 10),
+      Row(children: <Widget>[
+        Expanded(child: _UtilityPreviewCard(icon: Icons.location_on_outlined, title: 'الموقع', subtitle: 'المدينة أو GPS', footer: 'غير محدد')),
+        const SizedBox(width: 10),
+        Expanded(child: _UtilityPreviewCard(icon: Icons.tune_rounded, title: 'طريقة الحساب', subtitle: 'ضبط المواقيت', footer: 'تُختار لاحقاً')),
+      ]),
+      const SizedBox(height: 18),
       Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(19), border: Border.all(color: appGold.withValues(alpha: .25))),
@@ -1038,6 +1046,29 @@ class FavoritesDesignPage extends StatelessWidget {
             textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 13, height: 1.8)),
         ]),
       ),
+      const SizedBox(height: 18),
+      TextField(
+        decoration: InputDecoration(
+          hintText: 'ابحث في المفضلة',
+          prefixIcon: const Icon(Icons.search_rounded, color: appGold),
+          filled: true,
+          fillColor: appSurface,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+        ),
+      ),
+      const SizedBox(height: 12),
+      Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+        for (final String filter in <String>['الكل', 'القرآن', 'الأدعية', 'الزيارات', 'الصوتيات'])
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+            decoration: BoxDecoration(
+              color: filter == 'الكل' ? appSurfaceLight : appSurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: filter == 'الكل' ? appGold.withValues(alpha: .45) : appSurfaceLight),
+            ),
+            child: Text(filter, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: filter == 'الكل' ? appGold : appMuted)),
+          ),
+      ]),
       const SizedBox(height: 22),
       const _SectionTitle(title: 'أنواع المحفوظات'),
       const SizedBox(height: 10),
@@ -1150,8 +1181,34 @@ class DhikrDesignPage extends StatelessWidget {
             const Icon(Icons.chevron_left_rounded, color: appMuted),
           ]),
         ),
-      const SizedBox(height: 8),
-      const Text('عداد الركعات وحساب سجدتي السهو', style: TextStyle(color: appMuted, fontSize: 12)),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'أدوات الصلاة'),
+      const SizedBox(height: 10),
+      Row(children: <Widget>[
+        Expanded(child: _UtilityPreviewCard(
+          icon: Icons.countertops_rounded,
+          title: 'عداد الركعات',
+          subtitle: 'متابعة عدد الركعات',
+          footer: '٠ / ٤ ركعات',
+        )),
+        const SizedBox(width: 10),
+        Expanded(child: _UtilityPreviewCard(
+          icon: Icons.calculate_outlined,
+          title: 'سجدتا السهو',
+          subtitle: 'مساعد تذكيري',
+          footer: 'واجهة إرشادية',
+        )),
+      ]),
+      const SizedBox(height: 12),
+      Container(
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17), border: Border.all(color: appSurfaceLight)),
+        child: const Row(children: <Widget>[
+          Icon(Icons.info_outline_rounded, color: appGold),
+          SizedBox(width: 10),
+          Expanded(child: Text('ستُراجع تفاصيل الأحكام والمراجع قبل تفعيل أي حاسبة فقهية.', style: TextStyle(color: appMuted, fontSize: 12, height: 1.7))),
+        ]),
+      ),
     ],
   );
 }
@@ -1212,6 +1269,28 @@ class AudioDesignPage extends StatelessWidget {
           ]),
         ),
       const SizedBox(height: 12),
+      const _SectionTitle(title: 'قوائم الاستماع'),
+      const SizedBox(height: 10),
+      for (final _AudioCategory track in const <_AudioCategory>[
+        _AudioCategory(Icons.play_circle_outline_rounded, 'آخر ما استمعت إليه', 'ستظهر المقاطع الأخيرة هنا'),
+        _AudioCategory(Icons.download_outlined, 'المقاطع المحفوظة', 'مساحة للمقاطع المتاحة دون اتصال'),
+      ])
+        Container(
+          margin: const EdgeInsets.only(bottom: 9),
+          padding: const EdgeInsets.all(13),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(16), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            Icon(track.icon, color: appGold, size: 22),
+            const SizedBox(width: 10),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text(track.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 4),
+              Text(track.subtitle, style: const TextStyle(color: appMuted, fontSize: 11)),
+            ])),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
+      const SizedBox(height: 12),
       Container(
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
@@ -1246,6 +1325,52 @@ class AudioDesignPage extends StatelessWidget {
         ]),
       ),
     ],
+  );
+}
+
+
+class _UtilityPreviewCard extends StatelessWidget {
+  const _UtilityPreviewCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.footer,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final String footer;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    constraints: const BoxConstraints(minHeight: 148),
+    padding: const EdgeInsets.all(14),
+    decoration: BoxDecoration(
+      color: appSurface,
+      borderRadius: BorderRadius.circular(18),
+      border: Border.all(color: appSurfaceLight),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: appSurfaceLight,
+            borderRadius: BorderRadius.circular(13),
+          ),
+          child: Icon(icon, color: appGold, size: 21),
+        ),
+        const SizedBox(height: 12),
+        Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900)),
+        const SizedBox(height: 4),
+        Text(subtitle, style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
+        const Spacer(),
+        Text(footer, style: const TextStyle(color: appGold, fontSize: 11, fontWeight: FontWeight.w700)),
+      ],
+    ),
   );
 }
 
@@ -1335,6 +1460,14 @@ class CalendarDesignPage extends StatelessWidget {
           ),
         ]),
       ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'اختصارات التقويم'),
+      const SizedBox(height: 10),
+      Row(children: <Widget>[
+        Expanded(child: _UtilityPreviewCard(icon: Icons.cake_outlined, title: 'المواليد', subtitle: 'مناسبات الولادة', footer: 'عرض التقويم')),
+        const SizedBox(width: 10),
+        Expanded(child: _UtilityPreviewCard(icon: Icons.local_florist_outlined, title: 'الوفيات', subtitle: 'مناسبات العزاء', footer: 'عرض التقويم')),
+      ]),
       const SizedBox(height: 22),
       const _SectionTitle(title: 'المناسبات والأعمال'),
       const SizedBox(height: 10),
