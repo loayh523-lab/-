@@ -1151,7 +1151,7 @@ class DhikrDesignPage extends StatelessWidget {
           subtitle: 'متابعة عدد الركعات',
           footer: '٠ / ٤ ركعات',
         )),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Expanded(child: _UtilityPreviewCard(
           icon: Icons.calculate_outlined,
           title: 'سجدتا السهو',
@@ -1511,7 +1511,7 @@ class TasbihDesignPage extends StatelessWidget {
           const Text('المرحلة الأولى من تسبيح الزهراء عليها السلام',
             textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
           const SizedBox(height: 18),
-          const SizedBox(
+          SizedBox(
             width: double.infinity,
             height: 50,
             child: FilledButton.icon(
