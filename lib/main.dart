@@ -321,10 +321,10 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           decoration: BoxDecoration(
             color: appSurface,
-            borderRadius: const BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20),
           ),
-          child: Column(
-            children: const <Widget>[
+          child: const Column(
+            children: <Widget>[
               _PrayerRow(title: 'الفجر', icon: Icons.nightlight_round),
               _PrayerRow(title: 'الشروق', icon: Icons.wb_twilight_rounded),
               _PrayerRow(title: 'الظهر', icon: Icons.wb_sunny_outlined),
