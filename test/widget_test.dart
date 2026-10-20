@@ -64,7 +64,6 @@ void main() {
     await tester.tap(find.byTooltip('القائمة الجانبية'));
     await tester.pumpAndSettle();
 
-    final navList = find.byKey(const Key('drawer-navigation-list'));
     final quranTile = find.widgetWithText(ListTile, 'القرآن الكريم');
     await tester.tap(quranTile);
     await tester.pumpAndSettle();
