@@ -304,7 +304,7 @@ class _PrayerRow extends StatelessWidget {
             Icon(icon, color: appGold, size: 20),
             const SizedBox(width: 12),
             Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.w600))),
-            const Text('--:--', style: TextStyle(color: appMuted, fontFeatures: <FontFeature>[])),
+            const Text('--:--', style: TextStyle(color: appMuted)),
           ],
         ),
       );
