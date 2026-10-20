@@ -193,7 +193,7 @@ class _MainShellState extends State<MainShell> {
         actions: <Widget>[
           IconButton(
             tooltip: 'المفضلة',
-            onPressed: () => setState(() => selectedPage = 10),
+            onPressed: () => setState(() => selectedPage = 11),
             icon: const Icon(Icons.bookmark_border_rounded, color: appGold),
           ),
         ],
@@ -1537,9 +1537,9 @@ class TasbihDesignPage extends StatelessWidget {
       const SizedBox(height: 10),
       const _UtilityPreviewCard(
         icon: Icons.tune_rounded,
-        title: 'تحديد عدد التكرارات',
-        subtitle: 'اختيار هدف للورد اليومي',
-        footer: 'إعدادات العداد لاحقاً',
+        title: 'هدف التكرار',
+        subtitle: 'تحديد عدد التسبيحات لهذا الورد فقط',
+        footer: 'هدف الورد: 100 تكرار',
       ),
       const SizedBox(height: 14),
       Container(
