@@ -95,10 +95,7 @@ class _MainShellState extends State<MainShell> {
         CatalogGroup('زيارات المعصومين عليهم السلام', <String>['زيارة النبي محمد صلى الله عليه وآله', 'زيارة أمير المؤمنين عليه السلام', 'زيارة الإمام الحسن عليه السلام', 'زيارة الإمام الحسين عليه السلام', 'زيارة الإمام زين العابدين عليه السلام', 'زيارة الإمام محمد الباقر عليه السلام', 'زيارة الإمام جعفر الصادق عليه السلام', 'زيارة الإمام موسى الكاظم عليه السلام', 'زيارة الإمام علي الرضا عليه السلام', 'زيارة الإمام محمد الجواد عليه السلام', 'زيارة الإمام علي الهادي عليه السلام', 'زيارة الإمام الحسن العسكري عليه السلام', 'زيارة الإمام المهدي عجل الله فرجه', 'زيارة السيدة فاطمة الزهراء عليها السلام']),
         CatalogGroup('زيارات ومقامات أخرى', <String>['زيارة أبي الفضل العباس عليه السلام', 'زيارة مسلم بن عقيل عليه السلام', 'زيارة شهداء كربلاء عليهم السلام', 'زيارة وارث', 'زيارة الناحية المقدسة', 'زيارة الأربعين', 'زيارة يوم الجمعة', 'زيارة آل ياسين']),
       ]),
-      const CatalogPage(title: 'الأذكار والتسبيح', subtitle: 'حصن الذاكرين', groups: <CatalogGroup>[
-        CatalogGroup('الأذكار اليومية', <String>['أذكار الصباح', 'أذكار المساء', 'أذكار النوم', 'أذكار الاستيقاظ', 'أذكار الحفظ والحماية']),
-        CatalogGroup('العدادات', <String>['التسبيح الإلكتروني', 'تسبيح الزهراء عليها السلام', 'عداد الركعات', 'حساب سجدتي السهو']),
-      ]),
+      const DhikrDesignPage(),
       const PrayerDesignPage(),
       const CalendarDesignPage(),
       const CatalogPage(title: 'المناسبات والمواسم', subtitle: 'دليل المواسم الإيمانية', groups: <CatalogGroup>[
@@ -290,6 +287,96 @@ class CatalogPage extends StatelessWidget {
         ),
         const SizedBox(height: 22),
       ],
+    ],
+  );
+}
+
+class DhikrDesignPage extends StatelessWidget {
+  const DhikrDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.fingerprint_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('الأذكار والتسبيح', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('مساحة هادئة للأوراد اليومية والتسبيح والعدادات.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'تسبيح الزهراء عليها السلام'),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(22), border: Border.all(color: appSurfaceLight)),
+        child: Column(children: <Widget>[
+          const Text('نموذج واجهة العداد', style: TextStyle(color: appMuted, fontSize: 12)),
+          const SizedBox(height: 16),
+          Container(
+            width: 150, height: 150,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: appBackground, border: Border.all(color: appGold, width: 4)),
+            child: const Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Text('0', style: TextStyle(fontSize: 42, fontWeight: FontWeight.w900)),
+              SizedBox(height: 4),
+              Text('من 34', style: TextStyle(color: appMuted, fontSize: 12)),
+            ]),
+          ),
+          const SizedBox(height: 18),
+          const Text('الله أكبر • الحمد لله • سبحان الله', textAlign: TextAlign.center,
+            style: TextStyle(color: appGold, fontSize: 14, fontWeight: FontWeight.w800)),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: FilledButton.icon(
+              onPressed: null,
+              icon: const Icon(Icons.add_rounded),
+              label: const Text('التسبيح الإلكتروني - يُفعّل لاحقاً'),
+            ),
+          ),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'الأذكار اليومية'),
+      const SizedBox(height: 10),
+      for (final _AudioCategory item in const <_AudioCategory>[
+        _AudioCategory(Icons.wb_sunny_outlined, 'أذكار الصباح', 'ورد بداية اليوم'),
+        _AudioCategory(Icons.nights_stay_outlined, 'أذكار المساء', 'ورد المساء والحفظ'),
+        _AudioCategory(Icons.bedtime_outlined, 'أذكار النوم والاستيقاظ', 'أذكار قبل النوم وبعده'),
+        _AudioCategory(Icons.shield_outlined, 'أذكار الحفظ والحماية', 'أوراد يومية للحفظ'),
+      ])
+        Container(
+          margin: const EdgeInsets.only(bottom: 9),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            Icon(item.icon, color: appGold, size: 23),
+            const SizedBox(width: 12),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text(item.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 4),
+              Text(item.subtitle, style: const TextStyle(color: appMuted, fontSize: 11)),
+            ])),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
+      const SizedBox(height: 8),
+      const Text('عداد الركعات وحساب سجدتي السهو', style: TextStyle(color: appMuted, fontSize: 12)),
     ],
   );
 }
