@@ -365,7 +365,7 @@ class HomePage extends StatelessWidget {
           icon: Icons.menu_book_rounded,
           title: 'وردك من القرآن',
           subtitle: 'افتح المصحف وتابع قراءتك',
-          onTap: () => _showNotReady(context, 'القرآن الكريم'),
+          onTap: () => onOpen(1),
         ),
         const SizedBox(height: 22),
         const _SectionTitle(title: 'أعمال اليوم المصادف'),
