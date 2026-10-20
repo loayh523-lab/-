@@ -449,6 +449,14 @@ class _CatalogPageState extends State<CatalogPage> {
             ))
         .where((CatalogGroup group) => group.items.isNotEmpty)
         .toList(growable: false);
+    final int visibleItemCount = visibleGroups.fold<int>(
+      0,
+      (int total, CatalogGroup group) => total + group.items.length,
+    );
+    final int totalItemCount = widget.groups.fold<int>(
+      0,
+      (int total, CatalogGroup group) => total + group.items.length,
+    );
     return ListView(
     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
     children: <Widget>[
@@ -499,7 +507,27 @@ class _CatalogPageState extends State<CatalogPage> {
           ),
         ),
       ),
-      const SizedBox(height: 22),
+      const SizedBox(height: 12),
+      Row(
+        children: <Widget>[
+          const Icon(Icons.auto_awesome_outlined, color: appGold, size: 17),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              searchQuery.trim().isEmpty
+                  ? '${widget.groups.length} أبواب • $totalItemCount عنواناً'
+                  : '$visibleItemCount نتيجة مطابقة',
+              style: const TextStyle(color: appMuted, fontSize: 12, fontWeight: FontWeight.w600),
+            ),
+          ),
+          if (searchQuery.trim().isNotEmpty)
+            TextButton(
+              onPressed: () => setState(() => searchQuery = ''),
+              child: const Text('عرض الكل'),
+            ),
+        ],
+      ),
+      const SizedBox(height: 10),
       if (visibleGroups.isEmpty)
         Container(
           padding: const EdgeInsets.all(24),
