@@ -949,6 +949,7 @@ class SettingsDesignPage extends StatelessWidget {
         _SettingsOption(Icons.text_fields_rounded, 'حجم الخط', 'ضبط القراءة حسب راحتك'),
         _SettingsOption(Icons.notifications_none_rounded, 'تنبيهات الصلاة', 'تنظيم التذكير بمواقيت الصلاة'),
         _SettingsOption(Icons.volume_up_outlined, 'الأذان والأصوات', 'إعدادات الصوت والتنبيهات'),
+        _SettingsOption(Icons.wallpaper_rounded, 'الخلفيات الإسلامية', 'خلفيات عالية الدقة وتنسيقات هادئة'),
         _SettingsOption(Icons.location_on_outlined, 'الموقع وطريقة الحساب', 'المدينة وإعدادات المواقيت'),
       ])
         Container(
