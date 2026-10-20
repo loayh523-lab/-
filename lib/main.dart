@@ -72,7 +72,7 @@ class _MainShellState extends State<MainShell> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = <Widget>[
-      const HomePage(),
+      HomePage(onOpen: (int index) => setState(() => selectedPage = index)),
       const CatalogPage(title: 'القرآن الكريم', subtitle: 'الفرقان المبارك', groups: <CatalogGroup>[
         CatalogGroup('المصحف الشريف', <String>['فهرس السور الـ114', 'أجزاء القرآن الكريم', 'متابعة القراءة', 'ختمة القرآن']),
         CatalogGroup('أدوات القراءة', <String>['علامات الوقف والمتابعة', 'العلامات المرجعية', 'إعدادات العرض']),
@@ -273,7 +273,8 @@ class CatalogPage extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.onOpen});
+  final ValueChanged<int> onOpen;
 
   @override
   Widget build(BuildContext context) {
