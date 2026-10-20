@@ -11,41 +11,48 @@ void main() {
 
     await tester.tap(find.byTooltip('القائمة الجانبية'));
     await tester.pumpAndSettle();
+    final navList = find.byKey(const Key('drawer-navigation-list'));
     expect(find.text('القرآن الكريم'), findsWidgets);
     expect(find.text('الأدعية والمناجيات'), findsWidgets);
+
+    await tester.drag(navList, const Offset(0, -350));
+    await tester.pumpAndSettle();
     expect(find.text('مواقيت الصلاة'), findsWidgets);
     expect(find.text('القبلة'), findsWidgets);
     expect(find.text('التقويم الهجري'), findsWidgets);
     expect(find.text('الأعمال والعبادات'), findsWidgets);
-    await tester.drag(find.byKey(const Key('drawer-navigation-list')), const Offset(0, -900));
+
+    await tester.drag(navList, const Offset(0, -700));
     await tester.pumpAndSettle();
     expect(find.text('الإعدادات'), findsWidgets);
   });
 
-  testWidgets('prayer times and qibla open as separate sections', (tester) async {
+  testWidgets('prayer times open on their own page', (tester) async {
     await tester.pumpWidget(const MithaqApp());
-
     await tester.tap(find.byTooltip('القائمة الجانبية'));
     await tester.pumpAndSettle();
-    final prayerEntry = find.descendant(
-      of: find.byKey(const Key('drawer-navigation-list')),
-      matching: find.text('مواقيت الصلاة'),
-    );
-    await tester.ensureVisible(prayerEntry);
-    await tester.tap(prayerEntry);
+
+    final navList = find.byKey(const Key('drawer-navigation-list'));
+    final prayerTile = find.widgetWithText(ListTile, 'مواقيت الصلاة');
+    await tester.scrollUntilVisible(prayerTile, 180, scrollable: navList);
+    await tester.tap(prayerTile);
     await tester.pumpAndSettle();
+
     expect(find.text('مواقيت اليوم'), findsOneWidget);
     expect(find.text('اتجاه القبلة'), findsNothing);
+  });
 
+  testWidgets('qibla opens on its own page', (tester) async {
+    await tester.pumpWidget(const MithaqApp());
     await tester.tap(find.byTooltip('القائمة الجانبية'));
     await tester.pumpAndSettle();
-    final qiblaEntry = find.descendant(
-      of: find.byKey(const Key('drawer-navigation-list')),
-      matching: find.text('القبلة'),
-    );
-    await tester.ensureVisible(qiblaEntry);
-    await tester.tap(qiblaEntry);
+
+    final navList = find.byKey(const Key('drawer-navigation-list'));
+    final qiblaTile = find.widgetWithText(ListTile, 'القبلة');
+    await tester.scrollUntilVisible(qiblaTile, 180, scrollable: navList);
+    await tester.tap(qiblaTile);
     await tester.pumpAndSettle();
+
     expect(find.text('اتجاه القبلة'), findsWidgets);
     expect(find.text('مواقيت اليوم'), findsNothing);
   });
