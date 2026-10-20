@@ -1166,14 +1166,24 @@ class PlaceholderDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800))),
+    appBar: AppBar(
+      title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
+      actions: <Widget>[
+        IconButton(
+          tooltip: 'حفظ في المفضلة لاحقاً',
+          onPressed: null,
+          icon: const Icon(Icons.bookmark_border_rounded, color: appGold),
+        ),
+      ],
+    ),
     body: ListView(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 28),
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(26),
             gradient: const LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
@@ -1181,43 +1191,146 @@ class PlaceholderDetailPage extends StatelessWidget {
             ),
             border: Border.all(color: appGold.withValues(alpha: .3)),
           ),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-            const Icon(Icons.auto_awesome_rounded, color: appGold, size: 30),
-            const SizedBox(height: 18),
-            Text(section, style: const TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 8),
-            Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, height: 1.5)),
-            const SizedBox(height: 12),
-            const Text('مساحة مخصصة لهذا المحتوى ضمن تصميم ميثاق المؤمن.',
-              style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
-          ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: .06),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: appGold.withValues(alpha: .35)),
+                ),
+                child: const Icon(Icons.auto_awesome_rounded, color: appGold, size: 25),
+              ),
+              const SizedBox(height: 20),
+              Text(section, style: const TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
+              const SizedBox(height: 8),
+              Text(title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900, height: 1.5)),
+              const SizedBox(height: 12),
+              const Text('صفحة المحتوى', style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              const SizedBox(height: 18),
+              const Row(
+                children: <Widget>[
+                  Icon(Icons.text_fields_rounded, color: appGold, size: 17),
+                  SizedBox(width: 7),
+                  Text('عرض مريح للقراءة', style: TextStyle(color: appMuted, fontSize: 12)),
+                  Spacer(),
+                  Icon(Icons.headphones_rounded, color: appGold, size: 17),
+                  SizedBox(width: 6),
+                  Text('الصوت لاحقاً', style: TextStyle(color: appMuted, fontSize: 12)),
+                ],
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 18),
         Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             color: appSurface,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(17),
             border: Border.all(color: appSurfaceLight),
           ),
-          child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-            Text('قيد استكمال المحتوى', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-            SizedBox(height: 8),
-            Text('التصميم الأساسي جاهز لهذه الصفحة. سيُضاف النص والمصادر والأدوات بعد اكتمال مرحلة تصميم الواجهات.',
-              style: TextStyle(color: appMuted, height: 1.9, fontSize: 13)),
-          ]),
-        ),
-        const SizedBox(height: 14),
-        OutlinedButton.icon(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.arrow_forward_rounded),
-          label: const Text('العودة إلى القسم'),
-          style: OutlinedButton.styleFrom(
-            foregroundColor: appGold,
-            side: const BorderSide(color: appGold),
-            padding: const EdgeInsets.symmetric(vertical: 14),
+          child: const Row(
+            children: <Widget>[
+              Expanded(child: _DetailTab(label: 'النص', icon: Icons.menu_book_rounded, selected: true)),
+              Expanded(child: _DetailTab(label: 'المعاني', icon: Icons.notes_rounded)),
+              Expanded(child: _DetailTab(label: 'المصادر', icon: Icons.library_books_rounded)),
+            ],
           ),
         ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 24, 20, 22),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(22),
+            border: Border.all(color: appSurfaceLight),
+          ),
+          child: Column(
+            children: <Widget>[
+              const Icon(Icons.menu_book_rounded, color: appGold, size: 34),
+              const SizedBox(height: 14),
+              const Text('سيُضاف النص المعتمد هنا', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
+              const SizedBox(height: 8),
+              const Text(
+                'نرتّب النص والتشكيل والشرح والمصدر قبل تفعيل المحتوى، حتى تكون القراءة واضحة ويمكن الرجوع إلى مصدر موثوق.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: appMuted, fontSize: 13, height: 1.9),
+              ),
+              const SizedBox(height: 22),
+              for (final double width in <double>[.94, .82, .9, .68])
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 9),
+                  child: FractionallySizedBox(
+                    widthFactor: width,
+                    child: Container(
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: appSurfaceLight,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: null,
+                icon: const Icon(Icons.chevron_right_rounded),
+                label: const Text('السابق'),
+                style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: null,
+                icon: const Icon(Icons.chevron_left_rounded),
+                label: const Text('التالي'),
+                style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          'التصميم فقط حالياً — ستُفعّل القراءة والحفظ والصوت بعد اكتمال جميع الواجهات.',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: appMuted, fontSize: 11, height: 1.8),
+        ),
+      ],
+    ),
+  );
+}
+
+class _DetailTab extends StatelessWidget {
+  const _DetailTab({required this.label, required this.icon, this.selected = false});
+  final String label;
+  final IconData icon;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+    decoration: BoxDecoration(
+      color: selected ? appSurfaceLight : Colors.transparent,
+      borderRadius: BorderRadius.circular(12),
+      border: selected ? Border.all(color: appGold.withValues(alpha: .2)) : null,
+    ),
+    child: Column(
+      children: <Widget>[
+        Icon(icon, size: 18, color: selected ? appGold : appMuted),
+        const SizedBox(height: 5),
+        Text(label, style: TextStyle(fontSize: 11, fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
+          color: selected ? Colors.white : appMuted)),
       ],
     ),
   );
