@@ -201,7 +201,7 @@ class _MainShellState extends State<MainShell> {
         leading: IconButton(
           tooltip: 'القائمة الجانبية',
           onPressed: () => scaffoldKey.currentState?.openDrawer(),
-          icon: const Icon(Icons.cloud_outlined, color: appGold, size: 27),
+          icon: const Icon(Icons.menu_rounded, color: appGold, size: 27),
         ),
         title: Text(selectedPage == 0 ? 'مِيثَاقُ المُؤْمِنِ' : menuItems[selectedPage].title,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
