@@ -18,6 +18,8 @@ void main() {
 
     expect(find.text('0'), findsOneWidget);
 
+    await tester.ensureVisible(find.text('تسبيحة جديدة'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('تسبيحة جديدة'));
     await tester.pumpAndSettle();
     expect(find.text('1'), findsOneWidget);
