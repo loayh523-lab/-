@@ -200,7 +200,12 @@ class _MainShellState extends State<MainShell> {
           ),
         ],
       ),
-      body: IndexedStack(index: selectedPage, children: pages),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1120),
+          child: IndexedStack(index: selectedPage, children: pages),
+        ),
+      ),
     );
   }
 }
