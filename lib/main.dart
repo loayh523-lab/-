@@ -495,7 +495,7 @@ class _TasbeehPageState extends State<TasbeehPage> {
           child: Column(
             children: <Widget>[
               DropdownButtonFormField<String>(
-                value: phrase,
+                initialValue: phrase,
                 decoration: InputDecoration(
                   labelText: 'الذكر',
                   border: OutlineInputBorder(
