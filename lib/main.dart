@@ -52,9 +52,15 @@ class _MainShellState extends State<MainShell> {
   static const List<_MenuItem> menuItems = <_MenuItem>[
     _MenuItem('الرئيسية', Icons.home_rounded),
     _MenuItem('القرآن الكريم', Icons.menu_book_rounded),
-    _MenuItem('الأدعية والزيارات', Icons.volunteer_activism_rounded),
-    _MenuItem('التسبيح', Icons.fingerprint_rounded),
+    _MenuItem('الأدعية والمناجيات', Icons.volunteer_activism_rounded),
+    _MenuItem('الزيارات', Icons.account_balance_rounded),
+    _MenuItem('الأذكار والتسبيح', Icons.fingerprint_rounded),
+    _MenuItem('مواقيت الصلاة والقبلة', Icons.explore_rounded),
     _MenuItem('التقويم والأعمال', Icons.calendar_month_rounded),
+    _MenuItem('المناسبات والمواسم', Icons.event_rounded),
+    _MenuItem('الصوتيات', Icons.headphones_rounded),
+    _MenuItem('أسماء الله الحسنى', Icons.auto_awesome_rounded),
+    _MenuItem('المفضلة', Icons.bookmark_rounded),
     _MenuItem('الإعدادات', Icons.settings_rounded),
   ];
 
