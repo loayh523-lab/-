@@ -1565,7 +1565,7 @@ class AmaalDesignPage extends StatelessWidget {
           const SizedBox(height: 16),
           const _SectionTitle(title: 'المتابعة الشخصية'),
           const SizedBox(height: 10),
-          _AmaalPreviewTile(
+          const _AmaalPreviewTile(
             option: _SettingsOption(Icons.menu_book_rounded, 'متابعة ختمة القرآن',
                 'عرض تقدّم القراءة وعدد الأجزاء بعد تفعيل الميزة'),
           ),
@@ -1807,9 +1807,9 @@ class PrayerTimesDesignPage extends StatelessWidget {
           const SizedBox(height: 22),
           const _SectionTitle(title: 'ضبط المواقيت'),
           const SizedBox(height: 10),
-          Row(
+          const Row(
             children: <Widget>[
-              const Expanded(
+              Expanded(
                 child: _UtilityPreviewCard(
                   icon: Icons.location_on_outlined,
                   title: 'الموقع',
@@ -1817,8 +1817,8 @@ class PrayerTimesDesignPage extends StatelessWidget {
                   footer: 'غير محدد',
                 ),
               ),
-              const SizedBox(width: 10),
-              const Expanded(
+              SizedBox(width: 10),
+              Expanded(
                 child: _UtilityPreviewCard(
                   icon: Icons.tune_rounded,
                   title: 'طريقة الحساب',
