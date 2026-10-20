@@ -196,11 +196,38 @@ class _MainShellState extends State<MainShell> {
           ),
         ],
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1120),
-          child: IndexedStack(index: selectedPage, children: pages),
-        ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth >= 900) {
+            return Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 238,
+                  child: _DesktopSidebar(
+                    selectedPage: selectedPage,
+                    items: menuItems,
+                    onSelect: (int index) => setState(() => selectedPage = index),
+                  ),
+                ),
+                const VerticalDivider(width: 1, color: appSurfaceLight),
+                Expanded(
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 900),
+                      child: IndexedStack(index: selectedPage, children: pages),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1120),
+              child: IndexedStack(index: selectedPage, children: pages),
+            ),
+          );
+        },
       ),
     );
   }
@@ -210,6 +237,100 @@ class _MenuItem {
   const _MenuItem(this.title, this.icon);
   final String title;
   final IconData icon;
+}
+
+class _DesktopSidebar extends StatelessWidget {
+  const _DesktopSidebar({
+    required this.selectedPage,
+    required this.items,
+    required this.onSelect,
+  });
+
+  final int selectedPage;
+  final List<_MenuItem> items;
+  final ValueChanged<int> onSelect;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    color: appBackground,
+    padding: const EdgeInsets.fromLTRB(12, 18, 12, 14),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 8, 10, 20),
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: appSurfaceLight,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: appGold.withValues(alpha: .4)),
+                ),
+                child: const Icon(Icons.auto_awesome_rounded, color: appGold),
+              ),
+              const SizedBox(width: 10),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('مِيثَاقُ المُؤْمِنِ',
+                      maxLines: 1, overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900)),
+                    SizedBox(height: 4),
+                    Text('رفيق العبادة والإيمان',
+                      maxLines: 1, overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: appMuted, fontSize: 10)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Divider(color: appSurfaceLight, height: 1),
+        const SizedBox(height: 12),
+        Expanded(
+          child: ListView(
+            children: <Widget>[
+              for (int i = 0; i < items.length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: ListTile(
+                    dense: true,
+                    leading: Icon(items[i].icon,
+                      size: 21, color: selectedPage == i ? appGold : appMuted),
+                    title: Text(items[i].title,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: selectedPage == i ? Colors.white : appMuted,
+                        fontWeight: selectedPage == i ? FontWeight.w800 : FontWeight.w500,
+                      )),
+                    selected: selectedPage == i,
+                    selectedTileColor: appSurfaceLight,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    onTap: () => onSelect(i),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: appSurfaceLight),
+          ),
+          child: const Text('اللهم اجعل هذا العمل خالصاً لوجهك الكريم',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: appMuted, fontSize: 10, height: 1.7)),
+        ),
+      ],
+    ),
+  );
 }
 
 class CatalogGroup {
