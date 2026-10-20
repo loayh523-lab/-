@@ -73,11 +73,7 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     final List<Widget> pages = <Widget>[
       HomePage(onOpen: (int index) => setState(() => selectedPage = index)),
-      const CatalogPage(title: 'القرآن الكريم', subtitle: 'الفرقان المبارك', groups: <CatalogGroup>[
-        CatalogGroup('فهرس السور الـ114', <String>['الفاتحة', 'البقرة', 'آل عمران', 'النساء', 'المائدة', 'الأنعام', 'الأعراف', 'الأنفال', 'التوبة', 'يونس', 'هود', 'يوسف', 'الرعد', 'إبراهيم', 'الحجر', 'النحل', 'الإسراء', 'الكهف', 'مريم', 'طه', 'الأنبياء', 'الحج', 'المؤمنون', 'النور', 'الفرقان', 'الشعراء', 'النمل', 'القصص', 'العنكبوت', 'الروم', 'لقمان', 'السجدة', 'الأحزاب', 'سبأ', 'فاطر', 'يس', 'الصافات', 'ص', 'الزمر', 'غافر', 'فصلت', 'الشورى', 'الزخرف', 'الدخان', 'الجاثية', 'الأحقاف', 'محمد', 'الفتح', 'الحجرات', 'ق', 'الذاريات', 'الطور', 'النجم', 'القمر', 'الرحمن', 'الواقعة', 'الحديد', 'المجادلة', 'الحشر', 'الممتحنة', 'الصف', 'الجمعة', 'المنافقون', 'التغابن', 'الطلاق', 'التحريم', 'الملك', 'القلم', 'الحاقة', 'المعارج', 'نوح', 'الجن', 'المزمل', 'المدثر', 'القيامة', 'الإنسان', 'المرسلات', 'النبأ', 'النازعات', 'عبس', 'التكوير', 'الانفطار', 'المطففين', 'الانشقاق', 'البروج', 'الطارق', 'الأعلى', 'الغاشية', 'الفجر', 'البلد', 'الشمس', 'الليل', 'الضحى', 'الشرح', 'التين', 'العلق', 'القدر', 'البينة', 'الزلزلة', 'العاديات', 'القارعة', 'التكاثر', 'العصر', 'الهمزة', 'الفيل', 'قريش', 'الماعون', 'الكوثر', 'الكافرون', 'النصر', 'المسد', 'الإخلاص', 'الفلق', 'الناس']),
-        CatalogGroup('أجزاء القرآن الكريم', <String>['الجزء الأول', 'الجزء الثاني', 'الجزء الثالث', 'الجزء الرابع', 'الجزء الخامس', 'الجزء السادس', 'الجزء السابع', 'الجزء الثامن', 'الجزء التاسع', 'الجزء العاشر', 'الجزء الحادي عشر', 'الجزء الثاني عشر', 'الجزء الثالث عشر', 'الجزء الرابع عشر', 'الجزء الخامس عشر', 'الجزء السادس عشر', 'الجزء السابع عشر', 'الجزء الثامن عشر', 'الجزء التاسع عشر', 'الجزء العشرون', 'الجزء الحادي والعشرون', 'الجزء الثاني والعشرون', 'الجزء الثالث والعشرون', 'الجزء الرابع والعشرون', 'الجزء الخامس والعشرون', 'الجزء السادس والعشرون', 'الجزء السابع والعشرون', 'الجزء الثامن والعشرون', 'الجزء التاسع والعشرون', 'الجزء الثلاثون']),
-        CatalogGroup('متابعة القراءة والختمة', <String>['متابعة آخر موضع قراءة', 'علامات الوقف والمتابعة', 'العلامات المرجعية', 'خطة ختمة القرآن', 'سجل الإنجاز', 'إعدادات عرض المصحف']),
-      ]),
+      const QuranDesignPage(),
       const CatalogPage(title: 'الأدعية والمناجيات', subtitle: 'رياض الأدعية والمناجيات', groups: <CatalogGroup>[
         CatalogGroup('الأدعية المشهورة', <String>['دعاء كميل', 'دعاء الصباح', 'دعاء التوسل', 'دعاء الندبة', 'دعاء العهد', 'دعاء الفرج', 'دعاء السمات', 'الجوشن الكبير والصغير', 'دعاء أبي حمزة الثمالي', 'دعاء الافتتاح', 'مكارم الأخلاق', 'دعاء المشلول', 'دعاء المجير', 'دعاء البهاء', 'دعاء العديلة', 'دعاء علقمة وصفوان', 'دعاء الحزين والملهوف', 'التوبة والاستغفار', 'قضاء الحوائج']),
         CatalogGroup('الصحيفة السجادية', <String>['دعاؤه عليه السلام في التحميد لله عز وجل', 'دعاؤه عليه السلام في الصلاة على محمد وآله', 'دعاؤه عليه السلام في الصلاة على حملة العرش', 'دعاؤه عليه السلام في تصديق الرسل', 'دعاؤه عليه السلام لنفسه وخاصته', 'دعاؤه عليه السلام عند الصباح والمساء', 'دعاؤه عليه السلام عند المهمات', 'دعاؤه عليه السلام في الاستعاذة', 'دعاؤه عليه السلام في الاشتياق', 'دعاؤه عليه السلام في اللجأ إلى الله', 'دعاؤه عليه السلام في طلب العفو', 'دعاؤه عليه السلام في الاعتراف', 'دعاؤه عليه السلام في طلب الحوائج', 'دعاؤه عليه السلام عند الظلامات', 'دعاؤه عليه السلام عند المرض', 'دعاؤه عليه السلام في الاستقالة', 'دعاؤه عليه السلام على الشيطان', 'دعاؤه عليه السلام في المحذورات', 'دعاؤه عليه السلام في الاستسقاء', 'دعاؤه عليه السلام في مكارم الأخلاق', 'دعاؤه عليه السلام إذا أحزنه أمر', 'دعاؤه عليه السلام عند الشدة', 'دعاؤه عليه السلام بالعافية', 'دعاؤه عليه السلام للوالدين', 'دعاؤه عليه السلام لولده', 'دعاؤه عليه السلام لجيرانه وأوليائه', 'دعاؤه عليه السلام لأهل الثغور', 'دعاؤه عليه السلام في التفزع', 'دعاؤه عليه السلام عند ضيق الرزق', 'دعاؤه عليه السلام في المعونة على قضاء الدين', 'دعاؤه عليه السلام بالتوبة', 'دعاؤه عليه السلام بعد صلاة الليل', 'دعاؤه عليه السلام في الاستخارة', 'دعاؤه عليه السلام إذا ابتلي أو رأى مبتلى', 'دعاؤه عليه السلام في الرضا بالقضاء', 'دعاؤه عليه السلام عند سماع الرعد', 'دعاؤه عليه السلام في الشكر', 'دعاؤه عليه السلام في الاعتذار', 'دعاؤه عليه السلام في طلب الستر', 'دعاؤه عليه السلام عند ختم القرآن']),
@@ -285,6 +281,127 @@ class CatalogPage extends StatelessWidget {
         ),
         const SizedBox(height: 22),
       ],
+    ],
+  );
+}
+
+class QuranDesignPage extends StatelessWidget {
+  const QuranDesignPage({super.key});
+
+  static const List<String> surahNames = <String>['الفاتحة', 'البقرة', 'آل عمران', 'النساء', 'المائدة', 'الأنعام', 'الأعراف', 'الأنفال', 'التوبة', 'يونس', 'هود', 'يوسف', 'الرعد', 'إبراهيم', 'الحجر', 'النحل', 'الإسراء', 'الكهف', 'مريم', 'طه', 'الأنبياء', 'الحج', 'المؤمنون', 'النور', 'الفرقان', 'الشعراء', 'النمل', 'القصص', 'العنكبوت', 'الروم', 'لقمان', 'السجدة', 'الأحزاب', 'سبأ', 'فاطر', 'يس', 'الصافات', 'ص', 'الزمر', 'غافر', 'فصلت', 'الشورى', 'الزخرف', 'الدخان', 'الجاثية', 'الأحقاف', 'محمد', 'الفتح', 'الحجرات', 'ق', 'الذاريات', 'الطور', 'النجم', 'القمر', 'الرحمن', 'الواقعة', 'الحديد', 'المجادلة', 'الحشر', 'الممتحنة', 'الصف', 'الجمعة', 'المنافقون', 'التغابن', 'الطلاق', 'التحريم', 'الملك', 'القلم', 'الحاقة', 'المعارج', 'نوح', 'الجن', 'المزمل', 'المدثر', 'القيامة', 'الإنسان', 'المرسلات', 'النبأ', 'النازعات', 'عبس', 'التكوير', 'الانفطار', 'المطففين', 'الانشقاق', 'البروج', 'الطارق', 'الأعلى', 'الغاشية', 'الفجر', 'البلد', 'الشمس', 'الليل', 'الضحى', 'الشرح', 'التين', 'العلق', 'القدر', 'البينة', 'الزلزلة', 'العاديات', 'القارعة', 'التكاثر', 'العصر', 'الهمزة', 'الفيل', 'قريش', 'الماعون', 'الكوثر', 'الكافرون', 'النصر', 'المسد', 'الإخلاص', 'الفلق', 'الناس'];
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.menu_book_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('الفرقان المبارك', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('فهرس القرآن الكريم وسوره وأجزائه في تصميم مريح للقراءة.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 18),
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(19), border: Border.all(color: appGold.withValues(alpha: .25))),
+        child: const Row(children: <Widget>[
+          Icon(Icons.bookmark_outline_rounded, color: appGold, size: 26),
+          SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            Text('متابعة القراءة', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900)),
+            SizedBox(height: 5),
+            Text('ستظهر آخر سورة وموضع القراءة بعد تفعيل المتابعة', style: TextStyle(color: appMuted, fontSize: 11, height: 1.6)),
+          ])),
+        ]),
+      ),
+      const SizedBox(height: 20),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(15), border: Border.all(color: appSurfaceLight)),
+        child: const Row(children: <Widget>[
+          Icon(Icons.search_rounded, color: appMuted),
+          SizedBox(width: 10),
+          Expanded(child: Text('البحث عن سورة أو جزء', style: TextStyle(color: appMuted, fontSize: 12))),
+        ]),
+      ),
+      const SizedBox(height: 20),
+      Row(children: <Widget>[
+        const Expanded(child: _SectionTitle(title: 'سور القرآن الكريم')),
+        Text('114 سورة', style: TextStyle(color: appGold.withValues(alpha: .9), fontSize: 12, fontWeight: FontWeight.w800)),
+      ]),
+      const SizedBox(height: 12),
+      LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        final int columns = constraints.maxWidth >= 760 ? 4 : constraints.maxWidth >= 500 ? 3 : 2;
+        final double width = (constraints.maxWidth - 10 * (columns - 1)) / columns;
+        return Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: <Widget>[
+            for (int i = 0; i < surahNames.length; i++)
+              Container(
+                width: width,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
+                decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(15), border: Border.all(color: appSurfaceLight)),
+                child: Row(children: <Widget>[
+                  Container(
+                    width: 30, height: 30,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(color: appBackground, borderRadius: BorderRadius.circular(10)),
+                    child: Text('${i + 1}', style: const TextStyle(color: appGold, fontSize: 10, fontWeight: FontWeight.w800)),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(surahNames[i], maxLines: 1, overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800))),
+                ]),
+              ),
+          ],
+        );
+      }),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'أجزاء القرآن الكريم'),
+      const SizedBox(height: 12),
+      Wrap(
+        spacing: 9,
+        runSpacing: 9,
+        children: <Widget>[
+          for (int part = 1; part <= 30; part++)
+            Container(
+              width: 86,
+              padding: const EdgeInsets.symmetric(vertical: 13),
+              decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(13), border: Border.all(color: appSurfaceLight)),
+              child: Column(children: <Widget>[
+                const Icon(Icons.auto_stories_rounded, color: appGold, size: 20),
+                const SizedBox(height: 7),
+                Text('الجزء $part', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800)),
+              ]),
+            ),
+        ],
+      ),
+      const SizedBox(height: 20),
+      Container(
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17)),
+        child: const Row(children: <Widget>[
+          Icon(Icons.info_outline_rounded, color: appGold),
+          SizedBox(width: 10),
+          Expanded(child: Text('هذه واجهة الفهرس فقط. نص المصحف والتلاوة والعلامات المرجعية تُضاف بعد اكتمال التصميم.',
+            style: TextStyle(color: appMuted, fontSize: 11, height: 1.7))),
+        ]),
+      ),
     ],
   );
 }
