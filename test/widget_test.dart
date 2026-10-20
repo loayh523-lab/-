@@ -34,7 +34,8 @@ void main() {
 
     final navList = find.byKey(const Key('drawer-navigation-list'));
     final prayerTile = find.widgetWithText(ListTile, 'مواقيت الصلاة');
-    await tester.scrollUntilVisible(prayerTile, 180, scrollable: navList);
+    await tester.drag(navList, const Offset(0, -300));
+    await tester.pumpAndSettle();
     await tester.tap(prayerTile);
     await tester.pumpAndSettle();
 
@@ -49,7 +50,8 @@ void main() {
 
     final navList = find.byKey(const Key('drawer-navigation-list'));
     final qiblaTile = find.widgetWithText(ListTile, 'القبلة');
-    await tester.scrollUntilVisible(qiblaTile, 180, scrollable: navList);
+    await tester.drag(navList, const Offset(0, -350));
+    await tester.pumpAndSettle();
     await tester.tap(qiblaTile);
     await tester.pumpAndSettle();
 
