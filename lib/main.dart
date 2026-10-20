@@ -1365,8 +1365,16 @@ class _SettingsOption {
   final String subtitle;
 }
 
-class FavoritesDesignPage extends StatelessWidget {
+class FavoritesDesignPage extends StatefulWidget {
   const FavoritesDesignPage({super.key});
+
+  @override
+  State<FavoritesDesignPage> createState() => _FavoritesDesignPageState();
+}
+
+class _FavoritesDesignPageState extends State<FavoritesDesignPage> {
+  String selectedFilter = 'الكل';
+  String searchQuery = '';
 
   @override
   Widget build(BuildContext context) => ListView(
@@ -1399,17 +1407,24 @@ class FavoritesDesignPage extends StatelessWidget {
         child: const Column(children: <Widget>[
           Icon(Icons.bookmark_border_rounded, color: appGold, size: 54),
           SizedBox(height: 16),
-          Text('قائمتك تبدأ من هنا', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+          Text(searchQuery.trim().isNotEmpty ? 'ماكو نتائج للبحث' : selectedFilter == 'الكل' ? 'قائمتك تبدأ من هنا' : 'ماكو محفوظات ضمن $selectedFilter', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
           SizedBox(height: 8),
-          Text('ستظهر العناصر المحفوظة هنا بعد تفعيل ميزة المفضلة.',
+          Text(searchQuery.trim().isNotEmpty ? 'جرّب كلمة ثانية أو امسح البحث.' : 'ستظهر العناصر المحفوظة هنا بعد تفعيل ميزة المفضلة.',
             textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 13, height: 1.8)),
         ]),
       ),
       const SizedBox(height: 18),
       TextField(
+        textDirection: TextDirection.rtl,
+        onChanged: (String value) => setState(() => searchQuery = value),
         decoration: InputDecoration(
           hintText: 'ابحث في المفضلة',
           prefixIcon: const Icon(Icons.search_rounded, color: appGold),
+          suffixIcon: searchQuery.isEmpty ? null : IconButton(
+            tooltip: 'مسح البحث',
+            onPressed: () => setState(() => searchQuery = ''),
+            icon: const Icon(Icons.close_rounded, color: appMuted),
+          ),
           filled: true,
           fillColor: appSurface,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
@@ -1418,14 +1433,24 @@ class FavoritesDesignPage extends StatelessWidget {
       const SizedBox(height: 12),
       Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
         for (final String filter in <String>['الكل', 'القرآن', 'الأدعية', 'الزيارات', 'الصوتيات'])
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-            decoration: BoxDecoration(
-              color: filter == 'الكل' ? appSurfaceLight : appSurface,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: filter == 'الكل' ? appGold.withValues(alpha: .45) : appSurfaceLight),
+          InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () => setState(() => selectedFilter = filter),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+              decoration: BoxDecoration(
+                color: filter == selectedFilter ? appSurfaceLight : appSurface,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: filter == selectedFilter ? appGold.withValues(alpha: .45) : appSurfaceLight),
+              ),
+              child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                if (filter == selectedFilter) ...<Widget>[
+                  const Icon(Icons.check_rounded, color: appGold, size: 14),
+                  const SizedBox(width: 5),
+                ],
+                Text(filter, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: filter == selectedFilter ? appGold : appMuted)),
+              ]),
             ),
-            child: Text(filter, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: filter == 'الكل' ? appGold : appMuted)),
           ),
       ]),
       const SizedBox(height: 22),
