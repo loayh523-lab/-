@@ -654,6 +654,45 @@ class AsmaDesignPage extends StatelessWidget {
   }
 }
 
+class _GuideStep extends StatelessWidget {
+  const _GuideStep({required this.number, required this.title, required this.subtitle});
+  final String number;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 9),
+    child: Row(
+      children: <Widget>[
+        Container(
+          width: 34,
+          height: 34,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: appSurfaceLight,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: appGold.withValues(alpha: .25)),
+          ),
+          child: Text(number, style: const TextStyle(color: appGold, fontWeight: FontWeight.w900)),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 4),
+              Text(subtitle, style: const TextStyle(color: appMuted, fontSize: 11, height: 1.6)),
+            ],
+          ),
+        ),
+        const Icon(Icons.chevron_left_rounded, color: appMuted, size: 19),
+      ],
+    ),
+  );
+}
+
 class OccasionsDesignPage extends StatelessWidget {
   const OccasionsDesignPage({super.key});
 
@@ -730,7 +769,106 @@ class OccasionsDesignPage extends StatelessWidget {
             const Icon(Icons.chevron_left_rounded, color: appMuted),
           ]),
         ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 14),
+      const _SectionTitle(title: 'معاينة جدول رمضان'),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: appSurface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: appSurfaceLight),
+        ),
+        child: Column(
+          children: <Widget>[
+            const Row(
+              children: <Widget>[
+                Expanded(child: Text('اليوم', style: TextStyle(color: appMuted, fontSize: 11))),
+                Expanded(child: Text('الإمساك', textAlign: TextAlign.center,
+                  style: TextStyle(color: appMuted, fontSize: 11))),
+                Expanded(child: Text('الإفطار', textAlign: TextAlign.end,
+                  style: TextStyle(color: appMuted, fontSize: 11))),
+              ],
+            ),
+            const SizedBox(height: 10),
+            for (final List<String> row in const <List<String>>[
+              <String>['01', '— : —', '— : —'],
+              <String>['02', '— : —', '— : —'],
+              <String>['03', '— : —', '— : —'],
+            ])
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: const BoxDecoration(
+                  border: Border(top: BorderSide(color: appSurfaceLight)),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: Text('اليوم ${row[0]}',
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700))),
+                    Expanded(child: Text(row[1], textAlign: TextAlign.center,
+                      style: const TextStyle(color: appGold, fontSize: 12))),
+                    Expanded(child: Text(row[2], textAlign: TextAlign.end,
+                      style: const TextStyle(color: appGold, fontSize: 12))),
+                  ],
+                ),
+              ),
+            const SizedBox(height: 5),
+            const Text('أوقات تجريبية للتصميم — لا تمثل مواقيت فعلية',
+              style: TextStyle(color: appMuted, fontSize: 10)),
+          ],
+        ),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'دليل الحج والعمرة'),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: appSurface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: appSurfaceLight),
+        ),
+        child: const Column(
+          children: <Widget>[
+            _GuideStep(number: '١', title: 'الإحرام', subtitle: 'الاستعداد والنية ومحظورات الإحرام'),
+            _GuideStep(number: '٢', title: 'الطواف', subtitle: 'خطوات الطواف وأحكامه'),
+            _GuideStep(number: '٣', title: 'السعي', subtitle: 'السعي بين الصفا والمروة'),
+            _GuideStep(number: '٤', title: 'إكمال المناسك', subtitle: 'التقصير وبقية الأعمال حسب النسك'),
+          ],
+        ),
+      ),
+      const SizedBox(height: 22),
+      Container(
+        padding: const EdgeInsets.all(17),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF1C4734), appSurface],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .22)),
+        ),
+        child: const Row(
+          children: <Widget>[
+            Icon(Icons.directions_walk_rounded, color: appGold, size: 30),
+            SizedBox(width: 13),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('دليل زائر الأربعين', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15)),
+                  SizedBox(height: 5),
+                  Text('مسارات • إرشادات • نقاط خدمة • خريطة الزيارة',
+                    style: TextStyle(color: appMuted, fontSize: 11, height: 1.7)),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_left_rounded, color: appMuted),
+          ],
+        ),
+      ),
+      const SizedBox(height: 14),
       const Text('الأدلة والخرائط والتوقيتات تُضاف في مرحلة الخدمات',
         textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 11, height: 1.7)),
     ],
