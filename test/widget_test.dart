@@ -58,4 +58,27 @@ void main() {
     expect(find.text('اتجاه القبلة'), findsWidgets);
     expect(find.text('مواقيت اليوم'), findsNothing);
   });
+
+  testWidgets('Quran index searches and opens a surah preview', (tester) async {
+    await tester.pumpWidget(const MithaqApp());
+    await tester.tap(find.byTooltip('القائمة الجانبية'));
+    await tester.pumpAndSettle();
+
+    final navList = find.byKey(const Key('drawer-navigation-list'));
+    final quranTile = find.widgetWithText(ListTile, 'القرآن الكريم');
+    await tester.tap(quranTile);
+    await tester.pumpAndSettle();
+
+    expect(find.text('114 / 114 سورة'), findsOneWidget);
+    await tester.enterText(find.byType(TextField).first, 'الفاتحة');
+    await tester.pumpAndSettle();
+    expect(find.text('1 / 114 سورة'), findsOneWidget);
+    expect(find.text('الفاتحة'), findsWidgets);
+    expect(find.text('البقرة'), findsNothing);
+
+    await tester.tap(find.text('الفاتحة').last);
+    await tester.pumpAndSettle();
+    expect(find.text('السورة رقم 1'), findsOneWidget);
+    expect(find.text('تُضاف آيات السورة وخيارات القراءة والتلاوة في مرحلة المحتوى.'), findsOneWidget);
+  });
 }
