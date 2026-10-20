@@ -100,10 +100,7 @@ class _MainShellState extends State<MainShell> {
         CatalogGroup('العدادات', <String>['التسبيح الإلكتروني', 'تسبيح الزهراء عليها السلام', 'عداد الركعات', 'حساب سجدتي السهو']),
       ]),
       const PrayerDesignPage(),
-      const CatalogPage(title: 'التقويم والأعمال', subtitle: 'الأيام والمناسبات', groups: <CatalogGroup>[
-        CatalogGroup('التقويم', <String>['التقويم الهجري', 'المناسبات الإسلامية', 'مواليد ووفيات أهل البيت عليهم السلام']),
-        CatalogGroup('الأعمال', <String>['أعمال الأيام', 'أعمال الأشهر', 'الليالي المباركة', 'أعمال يوم الجمعة']),
-      ]),
+      const CalendarDesignPage(),
       const CatalogPage(title: 'المناسبات والمواسم', subtitle: 'دليل المواسم الإيمانية', groups: <CatalogGroup>[
         CatalogGroup('المواسم', <String>['شهر رمضان المبارك', 'جدول الإمساك والإفطار', 'الأعمال اليومية لشهر رمضان', 'الحج والعمرة', 'دليل زيارة الأربعين']),
         CatalogGroup('الأدلة', <String>['أحكام ومناسك الحج والعمرة', 'دليل الزائر', 'الإرشادات والخرائط']),
@@ -289,6 +286,104 @@ class CatalogPage extends StatelessWidget {
         ),
         const SizedBox(height: 22),
       ],
+    ],
+  );
+}
+
+class CalendarDesignPage extends StatelessWidget {
+  const CalendarDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.calendar_month_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('التقويم والأعمال', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('تابع الأيام والمناسبات والأعمال المستحبة في واجهة مرتبة.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Text('التاريخ الهجري', style: TextStyle(color: appGold, fontSize: 13)),
+          SizedBox(height: 8),
+          Text('يُحدَّد بعد ربط تقويم موثوق', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
+          SizedBox(height: 5),
+          Text('سيظهر الشهر واليوم والمناسبات المرتبطة بهما هنا.',
+            style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
+        child: Column(children: <Widget>[
+          const Row(children: <Widget>[
+            Icon(Icons.date_range_rounded, color: appGold),
+            SizedBox(width: 10),
+            Expanded(child: Text('عرض الشهر', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900))),
+            Text('هجري', style: TextStyle(color: appMuted, fontSize: 12)),
+          ]),
+          const SizedBox(height: 18),
+          const Row(
+            children: <Widget>[
+              for (String day in <String>['س', 'ح', 'ن', 'ث', 'ر', 'خ', 'ج'])
+                Expanded(child: Center(child: Text(day, style: TextStyle(color: appGold, fontWeight: FontWeight.w800)))),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 7,
+            runSpacing: 8,
+            children: <Widget>[
+              for (int day = 1; day <= 30; day++)
+                Container(
+                  width: 34,
+                  height: 34,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: appBackground,
+                    borderRadius: BorderRadius.circular(11),
+                    border: Border.all(color: appSurfaceLight),
+                  ),
+                  child: Text('$day', style: const TextStyle(fontSize: 11, color: appMuted)),
+                ),
+            ],
+          ),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'المناسبات والأعمال'),
+      const SizedBox(height: 10),
+      for (final String item in <String>['مواليد ووفيات أهل البيت عليهم السلام', 'أعمال الأيام والأشهر', 'الليالي المباركة', 'أعمال يوم الجمعة'])
+        Container(
+          margin: const EdgeInsets.only(bottom: 9),
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(16), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            const Icon(Icons.event_note_rounded, color: appGold),
+            const SizedBox(width: 12),
+            Expanded(child: Text(item, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700))),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
     ],
   );
 }
