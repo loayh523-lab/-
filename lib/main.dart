@@ -1367,7 +1367,7 @@ class _UtilityPreviewCard extends StatelessWidget {
         Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900)),
         const SizedBox(height: 4),
         Text(subtitle, style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
-        const Spacer(),
+        const SizedBox(height: 10),
         Text(footer, style: const TextStyle(color: appGold, fontSize: 11, fontWeight: FontWeight.w700)),
       ],
     ),
