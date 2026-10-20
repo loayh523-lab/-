@@ -56,8 +56,10 @@ class _MainShellState extends State<MainShell> {
     _MenuItem('الزيارات', Icons.account_balance_rounded),
     _MenuItem('الأذكار اليومية', Icons.wb_sunny_outlined),
     _MenuItem('التسبيح الإلكتروني', Icons.fingerprint_rounded),
-    _MenuItem('مواقيت الصلاة والقبلة', Icons.explore_rounded),
-    _MenuItem('التقويم والأعمال', Icons.calendar_month_rounded),
+    _MenuItem('مواقيت الصلاة', Icons.access_time_rounded),
+    _MenuItem('القبلة', Icons.explore_rounded),
+    _MenuItem('التقويم الهجري', Icons.calendar_month_rounded),
+    _MenuItem('الأعمال والعبادات', Icons.auto_awesome_rounded),
     _MenuItem('المناسبات والمواسم', Icons.event_rounded),
     _MenuItem('الصوتيات', Icons.headphones_rounded),
     _MenuItem('أسماء الله الحسنى', Icons.auto_awesome_rounded),
@@ -78,12 +80,67 @@ class _MainShellState extends State<MainShell> {
       HomePage(onOpen: (int index) => setState(() => selectedPage = index)),
       const QuranDesignPage(),
       const CatalogPage(title: 'الأدعية والمناجيات', subtitle: 'رياض الأدعية والمناجيات', groups: <CatalogGroup>[
-        CatalogGroup('الأدعية المشهورة', <String>['دعاء كميل', 'دعاء الصباح', 'دعاء التوسل', 'دعاء الندبة', 'دعاء العهد', 'دعاء الفرج', 'دعاء السمات', 'الجوشن الكبير والصغير', 'دعاء أبي حمزة الثمالي', 'دعاء الافتتاح', 'مكارم الأخلاق', 'دعاء المشلول', 'دعاء المجير', 'دعاء البهاء', 'دعاء العديلة', 'دعاء علقمة وصفوان', 'دعاء الحزين والملهوف', 'التوبة والاستغفار', 'قضاء الحوائج']),
+        CatalogGroup('الأدعية المشهورة', <String>[
+          'دعاء كميل', 'دعاء الصباح', 'دعاء التوسل', 'دعاء الندبة', 'دعاء العهد',
+          'دعاء الفرج', 'دعاء السمات', 'دعاء المشلول', 'الجوشن الكبير', 'الجوشن الصغير',
+          'دعاء العديلة', 'دعاء العديلة عند الموت', 'دعاء العشرات', 'دعاء يَستشير',
+          'دعاء المجير', 'دعاء أبي حمزة الثمالي', 'دعاء الافتتاح', 'دعاء البهاء',
+          'مكارم الأخلاق', 'دعاء علقمة', 'دعاء صفوان', 'دعاء الحزين', 'دعاء الملهوف',
+          'دعاء سريع الإجابة', 'دعاء النور', 'دعاء الاحتجاب', 'إلهي عظم البلاء',
+          'دعاء التوبة', 'الاستغفار', 'أدعية قضاء الحوائج'
+        ]),
         CatalogGroup('الصحيفة السجادية', <String>['دعاؤه عليه السلام في التحميد لله عز وجل', 'دعاؤه عليه السلام في الصلاة على محمد وآله', 'دعاؤه عليه السلام في الصلاة على حملة العرش', 'دعاؤه عليه السلام في تصديق الرسل', 'دعاؤه عليه السلام لنفسه وخاصته', 'دعاؤه عليه السلام عند الصباح والمساء', 'دعاؤه عليه السلام عند المهمات', 'دعاؤه عليه السلام في الاستعاذة', 'دعاؤه عليه السلام في الاشتياق', 'دعاؤه عليه السلام في اللجأ إلى الله', 'دعاؤه عليه السلام في طلب العفو', 'دعاؤه عليه السلام في الاعتراف', 'دعاؤه عليه السلام في طلب الحوائج', 'دعاؤه عليه السلام عند الظلامات', 'دعاؤه عليه السلام عند المرض', 'دعاؤه عليه السلام في الاستقالة', 'دعاؤه عليه السلام على الشيطان', 'دعاؤه عليه السلام في المحذورات', 'دعاؤه عليه السلام في الاستسقاء', 'دعاؤه عليه السلام في مكارم الأخلاق', 'دعاؤه عليه السلام إذا أحزنه أمر', 'دعاؤه عليه السلام عند الشدة', 'دعاؤه عليه السلام بالعافية', 'دعاؤه عليه السلام للوالدين', 'دعاؤه عليه السلام لولده', 'دعاؤه عليه السلام لجيرانه وأوليائه', 'دعاؤه عليه السلام لأهل الثغور', 'دعاؤه عليه السلام في التفزع', 'دعاؤه عليه السلام عند ضيق الرزق', 'دعاؤه عليه السلام في المعونة على قضاء الدين', 'دعاؤه عليه السلام بالتوبة', 'دعاؤه عليه السلام بعد صلاة الليل', 'دعاؤه عليه السلام في الاستخارة', 'دعاؤه عليه السلام إذا ابتلي أو رأى مبتلى', 'دعاؤه عليه السلام في الرضا بالقضاء', 'دعاؤه عليه السلام عند سماع الرعد', 'دعاؤه عليه السلام في الشكر', 'دعاؤه عليه السلام في الاعتذار', 'دعاؤه عليه السلام في طلب الستر', 'دعاؤه عليه السلام عند ختم القرآن']),
         CatalogGroup('المناجيات الخمس عشرة', <String>['مناجاة التائبين', 'مناجاة الشاكين', 'مناجاة الخائفين', 'مناجاة الراجين', 'مناجاة الراغبين', 'مناجاة الشاكرين', 'مناجاة المريدين', 'مناجاة المحبين', 'مناجاة المطيعين', 'مناجاة المتوسلين', 'مناجاة المفتقرين', 'مناجاة العارفين', 'مناجاة الذاكرين', 'مناجاة المعتصمين', 'مناجاة الزاهدين']),
         CatalogGroup('أدعية الإمام المهدي والفرج', <String>['دعاء الفرج', 'دعاء العهد', 'دعاء الندبة', 'دعاء زمن الغيبة', 'دعاء التوسل بالإمام المهدي عليه السلام', 'دعاء اللهم كن لوليك', 'دعاء السلام عليك يا صاحب الزمان', 'زيارة آل ياسين', 'دعاء تجديد العهد']),
-        CatalogGroup('الأدعية اليومية وأوقات الصلاة', <String>['دعاء الصباح والمساء', 'دعاء الاستيقاظ من النوم', 'دعاء النوم', 'دعاء دخول المنزل والخروج منه', 'دعاء السفر', 'دعاء طلب الرزق', 'دعاء الهم والغم', 'دعاء الحفظ والحماية', 'دعاء طلب العلم', 'دعاء للوالدين', 'دعاء للمريض', 'دعاء المطر والرعد', 'دعاء رؤية الهلال', 'دعاء دخول المسجد', 'تعقيبات صلاة الفجر', 'تعقيبات صلاة الظهر', 'تعقيبات صلاة العصر', 'تعقيبات صلاة المغرب', 'تعقيبات صلاة العشاء', 'أعمال يوم الجمعة']),
-        CatalogGroup('أدعية شهر رمضان', <String>['دعاء استقبال شهر رمضان', 'دعاء السحر', 'دعاء الافتتاح', 'دعاء أبي حمزة الثمالي', 'دعاء البهاء', 'أدعية ليالي القدر', 'دعاء وداع شهر رمضان', 'أعمال الليالي والأيام', 'دعاء اليوم الأول إلى العاشر', 'دعاء اليوم الحادي عشر إلى العشرين', 'دعاء اليوم الحادي والعشرين إلى الثلاثين', 'أدعية الإفطار والإمساك']),
+        CatalogGroup('الأدعية اليومية وأوقات الصلاة', <String>[
+          'دعاء الصباح', 'دعاء المساء', 'دعاء الاستيقاظ من النوم', 'دعاء النوم',
+          'دعاء دخول المنزل والخروج منه', 'دعاء السفر', 'دعاء طلب الرزق', 'دعاء الهم والغم',
+          'دعاء الحفظ والحماية', 'دعاء طلب العلم', 'دعاء للوالدين', 'دعاء للمريض',
+          'دعاء المطر', 'دعاء الرعد', 'دعاء رؤية الهلال', 'دعاء دخول المسجد والخروج منه',
+          'تعقيبات صلاة الفجر', 'تعقيبات صلاة الظهر', 'تعقيبات صلاة العصر',
+          'تعقيبات صلاة المغرب', 'تعقيبات صلاة العشاء', 'تعقيبات ما بعد الصلاة',
+          'أعمال يوم الجمعة'
+        ]),
+        CatalogGroup('أدعية شهر رمضان', <String>[
+          'دعاء استقبال شهر رمضان',
+          'دعاء السحر',
+          'دعاء الافتتاح',
+          'دعاء أبي حمزة الثمالي',
+          'دعاء البهاء',
+          'أدعية ليالي القدر',
+          'دعاء وداع شهر رمضان',
+          'أدعية الإفطار والإمساك',
+          'دعاء اليوم 1 من شهر رمضان',
+          'دعاء اليوم 2 من شهر رمضان',
+          'دعاء اليوم 3 من شهر رمضان',
+          'دعاء اليوم 4 من شهر رمضان',
+          'دعاء اليوم 5 من شهر رمضان',
+          'دعاء اليوم 6 من شهر رمضان',
+          'دعاء اليوم 7 من شهر رمضان',
+          'دعاء اليوم 8 من شهر رمضان',
+          'دعاء اليوم 9 من شهر رمضان',
+          'دعاء اليوم 10 من شهر رمضان',
+          'دعاء اليوم 11 من شهر رمضان',
+          'دعاء اليوم 12 من شهر رمضان',
+          'دعاء اليوم 13 من شهر رمضان',
+          'دعاء اليوم 14 من شهر رمضان',
+          'دعاء اليوم 15 من شهر رمضان',
+          'دعاء اليوم 16 من شهر رمضان',
+          'دعاء اليوم 17 من شهر رمضان',
+          'دعاء اليوم 18 من شهر رمضان',
+          'دعاء اليوم 19 من شهر رمضان',
+          'دعاء اليوم 20 من شهر رمضان',
+          'دعاء اليوم 21 من شهر رمضان',
+          'دعاء اليوم 22 من شهر رمضان',
+          'دعاء اليوم 23 من شهر رمضان',
+          'دعاء اليوم 24 من شهر رمضان',
+          'دعاء اليوم 25 من شهر رمضان',
+          'دعاء اليوم 26 من شهر رمضان',
+          'دعاء اليوم 27 من شهر رمضان',
+          'دعاء اليوم 28 من شهر رمضان',
+          'دعاء اليوم 29 من شهر رمضان',
+          'دعاء اليوم 30 من شهر رمضان'
+        ]),
         CatalogGroup('أدعية الأيام والأشهر والمناسبات', <String>['أدعية يوم الجمعة', 'أدعية يوم السبت', 'أدعية يوم الأحد', 'أدعية يوم الاثنين', 'أدعية يوم الثلاثاء', 'أدعية يوم الأربعاء', 'أدعية يوم الخميس', 'أعمال شهر رجب', 'أعمال شهر شعبان', 'أعمال شهر رمضان', 'أعمال شهر شوال', 'أعمال شهر ذي القعدة', 'أعمال شهر ذي الحجة', 'أعمال المحرم وصفر', 'أعمال النصف من شعبان', 'أعمال عيد الفطر', 'أعمال عيد الأضحى', 'أعمال الغدير']),
         CatalogGroup('أدعية التوبة والعبادة والأخلاق', <String>['دعاء التوبة', 'سيد الاستغفار', 'طلب المغفرة', 'دعاء الإخلاص', 'دعاء حسن العاقبة', 'دعاء حسن الخلق', 'دعاء كظم الغيظ', 'دعاء دفع الرياء', 'دعاء ترك المعصية', 'دعاء الثبات على الدين', 'دعاء قضاء الدين', 'دعاء رد المظالم', 'دعاء أداء الأمانة', 'دعاء الشكر', 'دعاء الصبر', 'دعاء التوكل', 'دعاء الرضا', 'دعاء دفع الوسوسة', 'دعاء عند الندم', 'دعاء قبول العمل']),
         CatalogGroup('أدعية الرزق والحوائج والشدائد', <String>['دعاء سعة الرزق', 'دعاء قضاء الحاجة', 'دعاء تفريج الكرب', 'دعاء الدين', 'دعاء دفع الفقر', 'دعاء النجاح والتوفيق', 'دعاء تيسير الأمور', 'دعاء الأمن من الخوف', 'دعاء دفع البلاء', 'دعاء الشفاء', 'دعاء الحفظ من الحسد', 'دعاء دفع الظلم', 'دعاء النصر', 'دعاء الغربة', 'دعاء عند الكرب الشديد', 'دعاء عند تعسر الأمور', 'دعاء عند الضيق', 'دعاء الاستعانة بالله', 'دعاء عند فقدان شيء', 'دعاء طلب الرحمة']),
@@ -96,8 +153,10 @@ class _MainShellState extends State<MainShell> {
       ]),
       const DhikrDesignPage(),
       const TasbihDesignPage(),
-      const PrayerDesignPage(),
+      const PrayerTimesDesignPage(),
+      const QiblaDesignPage(),
       const CalendarDesignPage(),
+      const AmaalDesignPage(),
       const OccasionsDesignPage(),
       const AudioDesignPage(),
       const AsmaDesignPage(),
@@ -197,7 +256,7 @@ class _MainShellState extends State<MainShell> {
         actions: <Widget>[
           IconButton(
             tooltip: 'المفضلة',
-            onPressed: () => setState(() => selectedPage = 11),
+            onPressed: () => setState(() => selectedPage = 13),
             icon: const Icon(Icons.bookmark_border_rounded, color: appGold),
           ),
         ],
@@ -1113,7 +1172,7 @@ class DhikrDesignPage extends StatelessWidget {
           border: Border.all(color: appGold.withValues(alpha: .28)),
         ),
         child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-          Icon(Icons.fingerprint_rounded, color: appGold, size: 30),
+          Icon(Icons.wb_sunny_outlined, color: appGold, size: 30),
           SizedBox(height: 14),
           Text('الأذكار اليومية', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
           SizedBox(height: 8),
@@ -1323,107 +1382,246 @@ class CalendarDesignPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-    children: <Widget>[
-      Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          gradient: const LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+              ),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.calendar_month_rounded, color: appGold, size: 30),
+                SizedBox(height: 14),
+                Text('التقويم الهجري',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+                SizedBox(height: 8),
+                Text('تقويم مستقل لمتابعة اليوم والشهر الهجري والتنقل بين أيامه.',
+                    style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              ],
+            ),
           ),
-          border: Border.all(color: appGold.withValues(alpha: .28)),
-        ),
-        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-          Icon(Icons.calendar_month_rounded, color: appGold, size: 30),
-          SizedBox(height: 14),
-          Text('التقويم والأعمال', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
-          SizedBox(height: 8),
-          Text('تابع الأيام والمناسبات والأعمال المستحبة في واجهة مرتبة.',
-            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
-        ]),
-      ),
-      const SizedBox(height: 22),
-      Container(
-        padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
-        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-          Text('التاريخ الهجري', style: TextStyle(color: appGold, fontSize: 13)),
-          SizedBox(height: 8),
-          Text('يُحدَّد بعد ربط تقويم موثوق', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
-          SizedBox(height: 5),
-          Text('سيظهر الشهر واليوم والمناسبات المرتبطة بهما هنا.',
-            style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
-        ]),
-      ),
-      const SizedBox(height: 22),
-      Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
-        child: Column(children: <Widget>[
-          const Row(children: <Widget>[
-            Icon(Icons.date_range_rounded, color: appGold),
-            SizedBox(width: 10),
-            Expanded(child: Text('عرض الشهر', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900))),
-            Text('هجري', style: TextStyle(color: appMuted, fontSize: 12)),
-          ]),
-          const SizedBox(height: 18),
-          Row(
-            children: <Widget>[
-              for (String day in <String>['س', 'ح', 'ن', 'ث', 'ر', 'خ', 'ج'])
-                Expanded(child: Center(child: Text(day, style: const TextStyle(color: appGold, fontWeight: FontWeight.w800)))),
-            ],
+          const SizedBox(height: 22),
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('التاريخ الهجري', style: TextStyle(color: appGold, fontSize: 13)),
+                SizedBox(height: 8),
+                Text('يُعرض بعد ربط مصدر تقويم موثوق',
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
+                SizedBox(height: 5),
+                Text('لن يُعرض تاريخ تقديري على أنه تاريخ فعلي.',
+                    style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
+              ],
+            ),
           ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 7,
-            runSpacing: 8,
-            children: <Widget>[
-              for (int day = 1; day <= 30; day++)
-                Container(
-                  width: 34,
-                  height: 34,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: appBackground,
-                    borderRadius: BorderRadius.circular(11),
-                    border: Border.all(color: appSurfaceLight),
-                  ),
-                  child: Text('$day', style: const TextStyle(fontSize: 11, color: appMuted)),
+          const SizedBox(height: 22),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: Column(
+              children: <Widget>[
+                const Row(
+                  children: <Widget>[
+                    Icon(Icons.date_range_rounded, color: appGold),
+                    SizedBox(width: 10),
+                    Expanded(child: Text('عرض الشهر',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900))),
+                    Text('هجري', style: TextStyle(color: appMuted, fontSize: 12)),
+                  ],
                 ),
-            ],
+                const SizedBox(height: 18),
+                Row(
+                  children: <Widget>[
+                    for (final String dayName in <String>['س', 'ح', 'ن', 'ث', 'ر', 'خ', 'ج'])
+                      Expanded(
+                        child: Center(
+                          child: Text(dayName,
+                              style: const TextStyle(color: appGold, fontWeight: FontWeight.w800)),
+                        ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 7,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    for (int day = 1; day <= 30; day++)
+                      Container(
+                        width: 34,
+                        height: 34,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: appBackground,
+                          borderRadius: BorderRadius.circular(11),
+                          border: Border.all(color: appSurfaceLight),
+                        ),
+                        child: Text('$day',
+                            style: const TextStyle(fontSize: 11, color: appMuted)),
+                      ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ]),
-      ),
-      const SizedBox(height: 22),
-      const _SectionTitle(title: 'اختصارات التقويم'),
-      const SizedBox(height: 10),
-      const Row(children: <Widget>[
-        Expanded(child: _UtilityPreviewCard(icon: Icons.cake_outlined, title: 'المواليد', subtitle: 'مناسبات الولادة', footer: 'عرض التقويم')),
-        const SizedBox(width: 10),
-        Expanded(child: _UtilityPreviewCard(icon: Icons.local_florist_outlined, title: 'الوفيات', subtitle: 'مناسبات العزاء', footer: 'عرض التقويم')),
-      ]),
-      const SizedBox(height: 22),
-      const _SectionTitle(title: 'المناسبات والأعمال'),
-      const SizedBox(height: 10),
-      for (final String item in <String>['مواليد ووفيات أهل البيت عليهم السلام', 'أعمال الأيام والأشهر', 'الليالي المباركة', 'أعمال يوم الجمعة'])
-        Container(
-          margin: const EdgeInsets.only(bottom: 9),
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(16), border: Border.all(color: appSurfaceLight)),
-          child: Row(children: <Widget>[
-            const Icon(Icons.event_note_rounded, color: appGold),
-            const SizedBox(width: 12),
-            Expanded(child: Text(item, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700))),
-            const Icon(Icons.chevron_left_rounded, color: appMuted),
-          ]),
-        ),
-    ],
-  );
+          const SizedBox(height: 18),
+          const Text(
+            'أيام الشهر ومطابقة بدايته تُربط بمصدر معتمد في مرحلة الخدمات.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: appMuted, fontSize: 11, height: 1.8),
+          ),
+        ],
+      );
 }
 
+class AmaalDesignPage extends StatelessWidget {
+  const AmaalDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+              ),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.auto_awesome_rounded, color: appGold, size: 30),
+                SizedBox(height: 14),
+                Text('الأعمال والعبادات',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+                SizedBox(height: 8),
+                Text('صفحة مستقلة للأعمال اليومية والأسبوعية والشهرية والليالي المباركة.',
+                    style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const _SectionTitle(title: 'أعمال يومية وتعقيبات'),
+          const SizedBox(height: 10),
+          for (final _SettingsOption option in const <_SettingsOption>[
+            _SettingsOption(Icons.wb_sunny_outlined, 'أعمال كل يوم',
+                'مساحة مرتبة للأعمال اليومية'),
+            _SettingsOption(Icons.mosque_outlined, 'تعقيبات الصلوات',
+                'الفجر والظهر والعصر والمغرب والعشاء'),
+            _SettingsOption(Icons.nightlight_round, 'أعمال صلاة الليل',
+                'ترتيب الأعمال المرتبطة بصلاة الليل'),
+          ])
+            _AmaalPreviewTile(option: option),
+          const SizedBox(height: 16),
+          const _SectionTitle(title: 'أعمال الأسبوع'),
+          const SizedBox(height: 10),
+          for (final _SettingsOption option in const <_SettingsOption>[
+            _SettingsOption(Icons.calendar_view_week_rounded, 'أعمال يوم الجمعة',
+                'أعمال وأدعية يوم الجمعة'),
+            _SettingsOption(Icons.volunteer_activism_rounded, 'دعاء الندبة',
+                'اختصار للوصول إلى الدعاء ضمن مكتبة الأدعية'),
+          ])
+            _AmaalPreviewTile(option: option),
+          const SizedBox(height: 16),
+          const _SectionTitle(title: 'أعمال الأشهر والليالي'),
+          const SizedBox(height: 10),
+          for (final _SettingsOption option in const <_SettingsOption>[
+            _SettingsOption(Icons.nights_stay_outlined, 'أعمال الليالي المباركة',
+                'ليالي القدر والنصف من شعبان وغيرها'),
+            _SettingsOption(Icons.calendar_month_rounded, 'أعمال شهر رجب',
+                'الأعمال والأدعية الخاصة بالشهر'),
+            _SettingsOption(Icons.calendar_month_rounded, 'أعمال شهر شعبان',
+                'الأعمال والأدعية الخاصة بالشهر'),
+            _SettingsOption(Icons.nightlight_round, 'أعمال شهر رمضان',
+                'أدعية الأيام والليالي والأعمال'),
+            _SettingsOption(Icons.event_available_rounded, 'أعمال ذي الحجة ومحرم وصفر',
+                'ترتيب مستقل لأعمال الأشهر'),
+          ])
+            _AmaalPreviewTile(option: option),
+          const SizedBox(height: 16),
+          const _SectionTitle(title: 'المتابعة الشخصية'),
+          const SizedBox(height: 10),
+          _AmaalPreviewTile(
+            option: _SettingsOption(Icons.menu_book_rounded, 'متابعة ختمة القرآن',
+                'عرض تقدّم القراءة وعدد الأجزاء بعد تفعيل الميزة'),
+          ),
+          const SizedBox(height: 14),
+          const Text(
+            'هذه معاينة للواجهة؛ تفاصيل الأعمال ومصادرها تُراجع قبل تفعيلها.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: appMuted, fontSize: 11, height: 1.8),
+          ),
+        ],
+      );
+}
+
+class _AmaalPreviewTile extends StatelessWidget {
+  const _AmaalPreviewTile({required this.option});
+
+  final _SettingsOption option;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        margin: const EdgeInsets.only(bottom: 9),
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: appSurface,
+          borderRadius: BorderRadius.circular(17),
+          border: Border.all(color: appSurfaceLight),
+        ),
+        child: Row(
+          children: <Widget>[
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: appBackground,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Icon(option.icon, color: appGold, size: 22),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(option.title,
+                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
+                  const SizedBox(height: 5),
+                  Text(option.subtitle,
+                      style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ],
+        ),
+      );
+}
 
 class TasbihDesignPage extends StatelessWidget {
   const TasbihDesignPage({super.key});
@@ -1533,106 +1731,243 @@ class TasbihDesignPage extends StatelessWidget {
   );
 }
 
-class PrayerDesignPage extends StatelessWidget {
-  const PrayerDesignPage({super.key});
+class PrayerTimesDesignPage extends StatelessWidget {
+  const PrayerTimesDesignPage({super.key});
 
   @override
   Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-    children: <Widget>[
-      Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          gradient: const LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
-          ),
-          border: Border.all(color: appGold.withValues(alpha: .28)),
-        ),
-        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-          Icon(Icons.explore_rounded, color: appGold, size: 30),
-          SizedBox(height: 14),
-          Text('الصلاة والقبلة', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
-          SizedBox(height: 8),
-          Text('مواقيت الصلوات الخمس واتجاه القبلة في واجهة واحدة.',
-            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
-        ]),
-      ),
-      const SizedBox(height: 22),
-      Container(
-        padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
-        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-          Text('الصلاة القادمة', style: TextStyle(color: appGold, fontSize: 13)),
-          SizedBox(height: 8),
-          Text('تُحدَّد بعد ضبط الموقع', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-          SizedBox(height: 5),
-          Text('— : —  المتبقي للصلاة', style: TextStyle(color: appMuted, fontSize: 12)),
-        ]),
-      ),
-      const SizedBox(height: 22),
-      const _SectionTitle(title: 'مواقيت الصلاة'),
-      const SizedBox(height: 10),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
-        child: const Column(children: <Widget>[
-          _PrayerRow(title: 'الفجر', icon: Icons.nightlight_round),
-          _PrayerRow(title: 'الشروق', icon: Icons.wb_twilight_rounded),
-          _PrayerRow(title: 'الظهر', icon: Icons.wb_sunny_outlined),
-          _PrayerRow(title: 'العصر', icon: Icons.sunny),
-          _PrayerRow(title: 'المغرب', icon: Icons.wb_twilight_rounded),
-          _PrayerRow(title: 'العشاء', icon: Icons.nights_stay_outlined, last: true),
-        ]),
-      ),
-      const SizedBox(height: 24),
-      const _SectionTitle(title: 'اتجاه القبلة'),
-      const SizedBox(height: 10),
-      Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(22), border: Border.all(color: appSurfaceLight)),
-        child: Column(children: <Widget>[
-          const Text('يُعرض اتجاه القبلة بعد تفعيل الموقع والبوصلة',
-            textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
-          const SizedBox(height: 20),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: <Widget>[
           Container(
-            width: 190, height: 190,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: appBackground, border: Border.all(color: appGold.withValues(alpha: .65), width: 2)),
-            child: Stack(alignment: Alignment.center, children: <Widget>[
-              Container(width: 148, height: 148, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: appSurfaceLight, width: 2))),
-              const Positioned(top: 10, child: Text('N', style: TextStyle(color: appMuted, fontWeight: FontWeight.w800))),
-              const Icon(Icons.navigation_rounded, color: appGold, size: 56),
-              const Positioned(bottom: 12, child: Text('QIBLA', style: TextStyle(color: appMuted, fontSize: 10, letterSpacing: 2))),
-            ]),
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+              ),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.access_time_rounded, color: appGold, size: 30),
+                SizedBox(height: 14),
+                Text('مواقيت الصلاة',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+                SizedBox(height: 8),
+                Text('صفحة مخصصة للصلوات الخمس ووقت الصلاة القادمة وإعدادات الحساب.',
+                    style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              ],
+            ),
           ),
-          const SizedBox(height: 18),
-          const Text('لم يتم تحديد المدينة', style: TextStyle(fontWeight: FontWeight.w800)),
-          const SizedBox(height: 6),
-          const Text('ستظهر المدينة ودرجة الاتجاه هنا', style: TextStyle(color: appMuted, fontSize: 12)),
-        ]),
-      ),
-      const SizedBox(height: 22),
-      const _SectionTitle(title: 'إعدادات المواقيت'),
-      const SizedBox(height: 10),
-      const Row(children: <Widget>[
-        Expanded(child: _UtilityPreviewCard(icon: Icons.location_on_outlined, title: 'الموقع', subtitle: 'المدينة أو GPS', footer: 'غير محدد')),
-        const SizedBox(width: 10),
-        Expanded(child: _UtilityPreviewCard(icon: Icons.tune_rounded, title: 'طريقة الحساب', subtitle: 'ضبط المواقيت', footer: 'تُختار لاحقاً')),
-      ]),
-      const SizedBox(height: 12),
-      Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17), border: Border.all(color: appSurfaceLight)),
-        child: const Row(children: <Widget>[
-          Icon(Icons.info_outline_rounded, color: appGold),
-          SizedBox(width: 10),
-          Expanded(child: Text('تظهر المواقيت والاتجاه الصحيح بعد إعداد الموقع والتحقق من طريقة الحساب.', style: TextStyle(color: appMuted, fontSize: 12, height: 1.7))),
-        ]),
-      ),
-    ],
-  );
+          const SizedBox(height: 22),
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('الصلاة القادمة', style: TextStyle(color: appGold, fontSize: 13)),
+                SizedBox(height: 8),
+                Text('تُحدَّد بعد ضبط الموقع',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                SizedBox(height: 5),
+                Text('— : —  المتبقي للصلاة',
+                    style: TextStyle(color: appMuted, fontSize: 12)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const _SectionTitle(title: 'مواقيت اليوم'),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: const Column(
+              children: <Widget>[
+                _PrayerRow(title: 'الفجر', icon: Icons.nightlight_round),
+                _PrayerRow(title: 'الشروق', icon: Icons.wb_twilight_rounded),
+                _PrayerRow(title: 'الظهر', icon: Icons.wb_sunny_outlined),
+                _PrayerRow(title: 'العصر', icon: Icons.sunny),
+                _PrayerRow(title: 'المغرب', icon: Icons.wb_twilight_rounded),
+                _PrayerRow(title: 'العشاء', icon: Icons.nights_stay_outlined, last: true),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const _SectionTitle(title: 'ضبط المواقيت'),
+          const SizedBox(height: 10),
+          Row(
+            children: <Widget>[
+              const Expanded(
+                child: _UtilityPreviewCard(
+                  icon: Icons.location_on_outlined,
+                  title: 'الموقع',
+                  subtitle: 'المدينة أو GPS',
+                  footer: 'غير محدد',
+                ),
+              ),
+              const SizedBox(width: 10),
+              const Expanded(
+                child: _UtilityPreviewCard(
+                  icon: Icons.tune_rounded,
+                  title: 'طريقة الحساب',
+                  subtitle: 'ضبط المواقيت',
+                  footer: 'تُختار لاحقاً',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(17),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: const Row(
+              children: <Widget>[
+                Icon(Icons.info_outline_rounded, color: appGold),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'المواقيت المعروضة حالياً هي هيكل تصميم، وليست أوقاتاً فعلية.',
+                    style: TextStyle(color: appMuted, fontSize: 12, height: 1.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+}
+
+class QiblaDesignPage extends StatelessWidget {
+  const QiblaDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+              ),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.explore_rounded, color: appGold, size: 30),
+                SizedBox(height: 14),
+                Text('اتجاه القبلة',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+                SizedBox(height: 8),
+                Text('بوصلة مستقلة لتحديد اتجاه القبلة بعد تفعيل الموقع ومستشعر الاتجاه.',
+                    style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: Column(
+              children: <Widget>[
+                const Text(
+                  'تُحدَّد جهة القبلة بعد تفعيل الموقع والبوصلة',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: appMuted, fontSize: 12, height: 1.7),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  width: 220,
+                  height: 220,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: appBackground,
+                    border: Border.all(color: appGold.withValues(alpha: .65), width: 2),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 178,
+                        height: 178,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: appSurfaceLight, width: 2),
+                        ),
+                      ),
+                      Container(
+                        width: 136,
+                        height: 136,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: appSurfaceLight),
+                        ),
+                      ),
+                      const Positioned(
+                        top: 12,
+                        child: Text('N',
+                            style: TextStyle(color: appMuted, fontWeight: FontWeight.w800)),
+                      ),
+                      const Positioned(
+                        bottom: 12,
+                        child: Text('QIBLA',
+                            style: TextStyle(color: appMuted, fontSize: 10, letterSpacing: 2)),
+                      ),
+                      const Icon(Icons.navigation_rounded, color: appGold, size: 62),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const Text('لم يتم تحديد الاتجاه بعد',
+                    style: TextStyle(fontWeight: FontWeight.w800)),
+                const SizedBox(height: 6),
+                const Text('ستظهر درجة الاتجاه بعد ربط المستشعر',
+                    style: TextStyle(color: appMuted, fontSize: 12)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const _SectionTitle(title: 'متطلبات تحديد القبلة'),
+          const SizedBox(height: 10),
+          for (final _SettingsOption option in const <_SettingsOption>[
+            _SettingsOption(Icons.location_on_outlined, 'تحديد الموقع',
+                'اختيار المدينة أو السماح باستخدام GPS'),
+            _SettingsOption(Icons.explore_outlined, 'معايرة البوصلة',
+                'التحقق من عمل مستشعر الاتجاه بالجهاز'),
+          ])
+            _AmaalPreviewTile(option: option),
+          const SizedBox(height: 8),
+          const Text(
+            'لا يُعرض اتجاه تخميني على أنه اتجاه قبلة مؤكد.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: appMuted, fontSize: 11, height: 1.8),
+          ),
+        ],
+      );
 }
 
 class PlaceholderDetailPage extends StatelessWidget {
@@ -1918,19 +2253,21 @@ class HomePage extends StatelessWidget {
               runSpacing: 12,
               children: <Widget>[
                 SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.menu_book_rounded, title: 'القرآن الكريم', subtitle: 'المصحف والختمة', onTap: () => onOpen(1))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.volunteer_activism_rounded, title: 'الأدعية', subtitle: 'الأدعية والمناجيات', onTap: () => onOpen(2))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.volunteer_activism_rounded, title: 'الأدعية والمناجيات', subtitle: 'مكتبة الأدعية', onTap: () => onOpen(2))),
                 SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.account_balance_rounded, title: 'الزيارات', subtitle: 'زيارات أهل البيت', onTap: () => onOpen(3))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.fingerprint_rounded, title: 'الأذكار اليومية', subtitle: 'أوراد الصباح والمساء', onTap: () => onOpen(4))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.wb_sunny_outlined, title: 'الأذكار اليومية', subtitle: 'أوراد الصباح والمساء', onTap: () => onOpen(4))),
                 SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.fingerprint_rounded, title: 'التسبيح الإلكتروني', subtitle: 'تسبيح الزهراء والعداد', onTap: () => onOpen(5))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.explore_rounded, title: 'الصلاة والقبلة', subtitle: 'المواقيت والاتجاه', onTap: () => onOpen(6))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calendar_month_rounded, title: 'التقويم', subtitle: 'الأيام والمناسبات', onTap: () => onOpen(7))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.event_rounded, title: 'المواسم', subtitle: 'رمضان والحج والأربعين', onTap: () => onOpen(8))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.headphones_rounded, title: 'الصوتيات', subtitle: 'تلاوات وأذان وأدعية', onTap: () => onOpen(9))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.auto_awesome_rounded, title: 'أسماء الله', subtitle: 'الأسماء والمعاني', onTap: () => onOpen(10))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.bookmark_border_rounded, title: 'المفضلة', subtitle: 'محفوظاتك', onTap: () => onOpen(11))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.countertops_rounded, title: 'عداد الركعات', subtitle: 'قسم مستقل', onTap: () => onOpen(12))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calculate_outlined, title: 'سجدتا السهو', subtitle: 'قسم مستقل', onTap: () => onOpen(13))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.settings_rounded, title: 'الإعدادات', subtitle: 'تخصيص التطبيق', onTap: () => onOpen(14))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.access_time_rounded, title: 'مواقيت الصلاة', subtitle: 'الصلوات الخمس', onTap: () => onOpen(6))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.explore_rounded, title: 'القبلة', subtitle: 'بوصلة الاتجاه', onTap: () => onOpen(7))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calendar_month_rounded, title: 'التقويم الهجري', subtitle: 'عرض الشهر والأيام', onTap: () => onOpen(8))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.auto_awesome_rounded, title: 'الأعمال والعبادات', subtitle: 'يومي وأسبوعي وشهري', onTap: () => onOpen(9))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.event_rounded, title: 'المناسبات والمواسم', subtitle: 'رمضان والحج والأربعين', onTap: () => onOpen(10))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.headphones_rounded, title: 'الصوتيات', subtitle: 'تلاوات وأذان وأدعية', onTap: () => onOpen(11))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.auto_awesome_rounded, title: 'أسماء الله الحسنى', subtitle: 'الأسماء والمعاني', onTap: () => onOpen(12))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.bookmark_border_rounded, title: 'المفضلة', subtitle: 'محفوظاتك', onTap: () => onOpen(13))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.countertops_rounded, title: 'عداد الركعات', subtitle: 'قسم مستقل', onTap: () => onOpen(14))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calculate_outlined, title: 'سجدتا السهو', subtitle: 'قسم مستقل', onTap: () => onOpen(15))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.settings_rounded, title: 'الإعدادات', subtitle: 'تخصيص التطبيق', onTap: () => onOpen(16))),
               ],
             );
           },
