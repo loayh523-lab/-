@@ -106,9 +106,7 @@ class _MainShellState extends State<MainShell> {
       const CatalogPage(title: 'أسماء الله الحسنى', subtitle: 'تعرّف إلى الأسماء ومعانيها', groups: <CatalogGroup>[
         CatalogGroup('الأسماء الحسنى', <String>['فهرس الأسماء الـ99', 'معاني الأسماء', 'الأسماء المفضلة']),
       ]),
-      const CatalogPage(title: 'المفضلة', subtitle: 'ما حفظته للرجوع إليه', groups: <CatalogGroup>[
-        CatalogGroup('المحفوظات', <String>['السور المفضلة', 'الأدعية والزيارات المفضلة', 'الأذكار المحفوظة', 'الصوتيات المفضلة']),
-      ]),
+      const FavoritesDesignPage(),
       const CatalogPage(title: 'الإعدادات', subtitle: 'خصص تجربتك', groups: <CatalogGroup>[
         CatalogGroup('التخصيص', <String>['المظهر الأخضر الزمردي', 'حجم الخط وطريقة العرض', 'اللغة واتجاه العرض']),
         CatalogGroup('التنبيهات والصوت', <String>['تنبيهات الصلاة', 'الأذان والأصوات', 'التذكير بالأذكار']),
@@ -287,6 +285,74 @@ class CatalogPage extends StatelessWidget {
         ),
         const SizedBox(height: 22),
       ],
+    ],
+  );
+}
+
+class FavoritesDesignPage extends StatelessWidget {
+  const FavoritesDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.bookmark_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('المفضلة', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('اجمع السور والأدعية والزيارات التي تريد الرجوع إليها بسهولة.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 34),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(22), border: Border.all(color: appSurfaceLight)),
+        child: const Column(children: <Widget>[
+          Icon(Icons.bookmark_border_rounded, color: appGold, size: 54),
+          SizedBox(height: 16),
+          Text('قائمتك تبدأ من هنا', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('ستظهر العناصر المحفوظة هنا بعد تفعيل ميزة المفضلة.',
+            textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 13, height: 1.8)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'أنواع المحفوظات'),
+      const SizedBox(height: 10),
+      for (final _AudioCategory item in const <_AudioCategory>[
+        _AudioCategory(Icons.menu_book_rounded, 'السور القرآنية', 'السور التي تحفظها'),
+        _AudioCategory(Icons.volunteer_activism_rounded, 'الأدعية والمناجيات', 'الأدعية التي تفضلها'),
+        _AudioCategory(Icons.account_balance_rounded, 'الزيارات', 'الزيارات المحفوظة'),
+        _AudioCategory(Icons.headphones_rounded, 'الصوتيات', 'مقاطع الاستماع المفضلة'),
+      ])
+        Container(
+          margin: const EdgeInsets.only(bottom: 9),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            Icon(item.icon, color: appGold, size: 22),
+            const SizedBox(width: 12),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text(item.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 4),
+              Text(item.subtitle, style: const TextStyle(color: appMuted, fontSize: 11)),
+            ])),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
     ],
   );
 }
