@@ -822,13 +822,13 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(2, 4, 2, 18),
           child: Row(
             children: <Widget>[
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const Text('السلام عليكم ورحمة الله', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
-                    const SizedBox(height: 5),
-                    const Text('رفيقك اليومي للعبادة والطمأنينة', style: TextStyle(color: appMuted, fontSize: 12)),
+                    Text('السلام عليكم ورحمة الله', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
+                    SizedBox(height: 5),
+                    Text('رفيقك اليومي للعبادة والطمأنينة', style: TextStyle(color: appMuted, fontSize: 12)),
                   ],
                 ),
               ),
