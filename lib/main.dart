@@ -742,7 +742,13 @@ class HomePage extends StatelessWidget {
         const SizedBox(height: 12),
         LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            final double itemWidth = (constraints.maxWidth - 12) / 2;
+            final int columns = constraints.maxWidth >= 900
+                ? 4
+                : constraints.maxWidth >= 600
+                    ? 3
+                    : 2;
+            final double itemWidth =
+                (constraints.maxWidth - (12 * (columns - 1))) / columns;
             return Wrap(
               spacing: 12,
               runSpacing: 12,
