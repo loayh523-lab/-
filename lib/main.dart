@@ -155,22 +155,29 @@ class _MainShellState extends State<MainShell> {
               ),
               const Divider(color: appSurfaceLight, height: 1),
               const SizedBox(height: 8),
-              for (int i = 0; i < menuItems.length; i++)
-                ListTile(
-                  leading: Icon(menuItems[i].icon,
-                      color: selectedPage == i ? appGold : appMuted),
-                  title: Text(menuItems[i].title,
-                      style: TextStyle(
-                        color: selectedPage == i ? Colors.white : appMuted,
-                        fontWeight: selectedPage == i ? FontWeight.w800 : FontWeight.w500,
-                      )),
-                  selected: selectedPage == i,
-                  selectedTileColor: appSurfaceLight,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  onTap: () => openPage(i),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  children: <Widget>[
+                    for (int i = 0; i < menuItems.length; i++)
+                      ListTile(
+                        leading: Icon(menuItems[i].icon,
+                            color: selectedPage == i ? appGold : appMuted),
+                        title: Text(menuItems[i].title,
+                            style: TextStyle(
+                              color: selectedPage == i ? Colors.white : appMuted,
+                              fontWeight: selectedPage == i ? FontWeight.w800 : FontWeight.w500,
+                              fontSize: 14,
+                            )),
+                        selected: selectedPage == i,
+                        selectedTileColor: appSurfaceLight,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14),
+                        onTap: () => openPage(i),
+                      ),
+                  ],
                 ),
-              const Spacer(),
+              ),
               const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text('اللهم اجعل هذا العمل خالصاً لوجهك الكريم',
