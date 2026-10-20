@@ -119,7 +119,7 @@ class _MainShellState extends State<MainShell> {
                         Text('مِيثَاقُ المُؤْمِنِ',
                             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
                         SizedBox(height: 4),
-                        Text('رفيق العبادة', style: TextStyle(color: appMuted, fontSize: 12)),
+                        Text('رفيق العبادة والإيمان', style: TextStyle(color: appMuted, fontSize: 12)),
                       ],
                     ),
                   ],
