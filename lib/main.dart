@@ -268,15 +268,18 @@ class CatalogPage extends StatelessWidget {
             for (int i = 0; i < group.items.length; i++)
               Container(
                 decoration: BoxDecoration(border: i == group.items.length - 1 ? null : const Border(bottom: BorderSide(color: appSurfaceLight, width: .8))),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                  title: Text(group.items[i], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.5)),
-                  trailing: const Icon(Icons.chevron_left_rounded, color: appMuted),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => PlaceholderDetailPage(
-                        title: group.items[i],
-                        section: title,
+                child: Material(
+                  color: Colors.transparent,
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    title: Text(group.items[i], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.5)),
+                    trailing: const Icon(Icons.chevron_left_rounded, color: appMuted),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => PlaceholderDetailPage(
+                          title: group.items[i],
+                          section: title,
+                        ),
                       ),
                     ),
                   ),
