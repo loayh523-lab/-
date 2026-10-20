@@ -2677,40 +2677,31 @@ class HomePage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 22),
-        const _SectionTitle(title: 'تصفّح أقسام التطبيق'),
-        const SizedBox(height: 12),
-        LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final int columns = constraints.maxWidth >= 900
-                ? 4
-                : constraints.maxWidth >= 600
-                    ? 3
-                    : 2;
-            final double itemWidth =
-                (constraints.maxWidth - (12 * (columns - 1))) / columns;
-            return Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: <Widget>[
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.menu_book_rounded, title: 'القرآن الكريم', subtitle: 'المصحف والختمة', onTap: () => onOpen(1))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.volunteer_activism_rounded, title: 'الأدعية والمناجيات', subtitle: 'مكتبة الأدعية', onTap: () => onOpen(2))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.account_balance_rounded, title: 'الزيارات', subtitle: 'زيارات أهل البيت', onTap: () => onOpen(3))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.wb_sunny_outlined, title: 'الأذكار اليومية', subtitle: 'أوراد الصباح والمساء', onTap: () => onOpen(4))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.fingerprint_rounded, title: 'التسبيح الإلكتروني', subtitle: 'تسبيح الزهراء والعداد', onTap: () => onOpen(5))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.access_time_rounded, title: 'مواقيت الصلاة', subtitle: 'الصلوات الخمس', onTap: () => onOpen(6))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.explore_rounded, title: 'القبلة', subtitle: 'بوصلة الاتجاه', onTap: () => onOpen(7))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calendar_month_rounded, title: 'التقويم الهجري', subtitle: 'عرض الشهر والأيام', onTap: () => onOpen(8))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.check_circle_outline_rounded, title: 'الأعمال والعبادات', subtitle: 'يومي وأسبوعي وشهري', onTap: () => onOpen(9))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.event_rounded, title: 'المناسبات والمواسم', subtitle: 'رمضان والحج والأربعين', onTap: () => onOpen(10))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.headphones_rounded, title: 'الصوتيات', subtitle: 'تلاوات وأذان وأدعية', onTap: () => onOpen(11))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.auto_awesome_rounded, title: 'أسماء الله الحسنى', subtitle: 'الأسماء والمعاني', onTap: () => onOpen(12))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.bookmark_border_rounded, title: 'المفضلة', subtitle: 'محفوظاتك', onTap: () => onOpen(13))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.countertops_rounded, title: 'عداد الركعات', subtitle: 'قسم مستقل', onTap: () => onOpen(14))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calculate_outlined, title: 'سجدتا السهو', subtitle: 'قسم مستقل', onTap: () => onOpen(15))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.settings_rounded, title: 'الإعدادات', subtitle: 'تخصيص التطبيق', onTap: () => onOpen(16))),
-              ],
-            );
-          },
+        const _SectionTitle(title: 'التاريخ الهجري'),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: appSurface,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: appGold.withValues(alpha: .15)),
+          ),
+          child: const Row(
+            children: <Widget>[
+              Icon(Icons.calendar_month_rounded, color: appGold, size: 25),
+              SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('التاريخ الهجري', style: TextStyle(fontWeight: FontWeight.w800)),
+                    SizedBox(height: 5),
+                    Text('سيظهر بعد ربط تقويم هجري موثوق', style: TextStyle(color: appMuted, fontSize: 12)),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 22),
         const _SectionTitle(title: 'أعمال اليوم المصادف'),
