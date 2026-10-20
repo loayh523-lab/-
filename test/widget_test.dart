@@ -13,7 +13,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('القرآن الكريم'), findsWidgets);
     expect(find.text('الأدعية والمناجيات'), findsOneWidget);
-    await tester.drag(find.byType(ListView).last, const Offset(0, -600));
+    await tester.drag(find.byKey(const Key('drawer-navigation-list')), const Offset(0, -600));
     await tester.pumpAndSettle();
     expect(find.text('الإعدادات'), findsOneWidget);
   });
