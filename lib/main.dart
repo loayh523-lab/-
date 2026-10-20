@@ -370,9 +370,43 @@ class CatalogPage extends StatelessWidget {
           Container(height: 3, width: 58, decoration: BoxDecoration(color: appGold, borderRadius: BorderRadius.circular(8))),
         ]),
       ),
-      const SizedBox(height: 24),
+      const SizedBox(height: 16),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
+        decoration: BoxDecoration(
+          color: appSurface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: appSurfaceLight),
+        ),
+        child: Row(
+          children: <Widget>[
+            const Icon(Icons.search_rounded, color: appGold, size: 21),
+            const SizedBox(width: 11),
+            Expanded(
+              child: Text('ابحث داخل $title', maxLines: 1, overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: appMuted, fontSize: 13)),
+            ),
+            const Icon(Icons.tune_rounded, color: appMuted, size: 19),
+          ],
+        ),
+      ),
+      const SizedBox(height: 22),
       for (final CatalogGroup group in groups) ...<Widget>[
-        Text(group.title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
+        Row(
+          children: <Widget>[
+            Expanded(child: Text(group.title,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900))),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+              decoration: BoxDecoration(
+                color: appSurfaceLight,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text('${group.items.length}',
+                style: const TextStyle(color: appGold, fontSize: 11, fontWeight: FontWeight.w800)),
+            ),
+          ],
+        ),
         const SizedBox(height: 11),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
