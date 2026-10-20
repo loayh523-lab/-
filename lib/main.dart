@@ -1404,8 +1404,8 @@ class _FavoritesDesignPageState extends State<FavoritesDesignPage> {
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 34),
         decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(22), border: Border.all(color: appSurfaceLight)),
-        child: const Column(children: <Widget>[
-          Icon(Icons.bookmark_border_rounded, color: appGold, size: 54),
+        child: Column(children: <Widget>[
+          const Icon(Icons.bookmark_border_rounded, color: appGold, size: 54),
           SizedBox(height: 16),
           Text(searchQuery.trim().isNotEmpty ? 'ماكو نتائج للبحث' : selectedFilter == 'الكل' ? 'قائمتك تبدأ من هنا' : 'ماكو محفوظات ضمن $selectedFilter', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
           SizedBox(height: 8),
