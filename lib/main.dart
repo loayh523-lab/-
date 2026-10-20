@@ -359,15 +359,6 @@ class HomePage extends StatelessWidget {
         const SizedBox(height: 9),
         _FeatureTile(icon: Icons.settings_rounded, title: 'الإعدادات', subtitle: 'تخصيص التطبيق', onTap: () => onOpen(11)),
         const SizedBox(height: 22),
-        const _SectionTitle(title: 'القرآن الكريم'),
-        const SizedBox(height: 10),
-        _FeatureTile(
-          icon: Icons.menu_book_rounded,
-          title: 'وردك من القرآن',
-          subtitle: 'افتح المصحف وتابع قراءتك',
-          onTap: () => onOpen(1),
-        ),
-        const SizedBox(height: 22),
         const _SectionTitle(title: 'أعمال اليوم المصادف'),
         const SizedBox(height: 10),
         Container(
