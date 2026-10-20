@@ -580,8 +580,15 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 }
 
-class QuranDesignPage extends StatelessWidget {
+class QuranDesignPage extends StatefulWidget {
   const QuranDesignPage({super.key});
+
+  @override
+  State<QuranDesignPage> createState() => _QuranDesignPageState();
+}
+
+class _QuranDesignPageState extends State<QuranDesignPage> {
+  String searchQuery = '';
 
   static const List<String> surahNames = <String>['الفاتحة', 'البقرة', 'آل عمران', 'النساء', 'المائدة', 'الأنعام', 'الأعراف', 'الأنفال', 'التوبة', 'يونس', 'هود', 'يوسف', 'الرعد', 'إبراهيم', 'الحجر', 'النحل', 'الإسراء', 'الكهف', 'مريم', 'طه', 'الأنبياء', 'الحج', 'المؤمنون', 'النور', 'الفرقان', 'الشعراء', 'النمل', 'القصص', 'العنكبوت', 'الروم', 'لقمان', 'السجدة', 'الأحزاب', 'سبأ', 'فاطر', 'يس', 'الصافات', 'ص', 'الزمر', 'غافر', 'فصلت', 'الشورى', 'الزخرف', 'الدخان', 'الجاثية', 'الأحقاف', 'محمد', 'الفتح', 'الحجرات', 'ق', 'الذاريات', 'الطور', 'النجم', 'القمر', 'الرحمن', 'الواقعة', 'الحديد', 'المجادلة', 'الحشر', 'الممتحنة', 'الصف', 'الجمعة', 'المنافقون', 'التغابن', 'الطلاق', 'التحريم', 'الملك', 'القلم', 'الحاقة', 'المعارج', 'نوح', 'الجن', 'المزمل', 'المدثر', 'القيامة', 'الإنسان', 'المرسلات', 'النبأ', 'النازعات', 'عبس', 'التكوير', 'الانفطار', 'المطففين', 'الانشقاق', 'البروج', 'الطارق', 'الأعلى', 'الغاشية', 'الفجر', 'البلد', 'الشمس', 'الليل', 'الضحى', 'الشرح', 'التين', 'العلق', 'القدر', 'البينة', 'الزلزلة', 'العاديات', 'القارعة', 'التكاثر', 'العصر', 'الهمزة', 'الفيل', 'قريش', 'الماعون', 'الكوثر', 'الكافرون', 'النصر', 'المسد', 'الإخلاص', 'الفلق', 'الناس'];
 
@@ -624,18 +631,28 @@ class QuranDesignPage extends StatelessWidget {
       ),
       const SizedBox(height: 20),
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
         decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(15), border: Border.all(color: appSurfaceLight)),
-        child: const Row(children: <Widget>[
-          Icon(Icons.search_rounded, color: appMuted),
-          SizedBox(width: 10),
-          Expanded(child: Text('البحث عن سورة أو جزء', style: TextStyle(color: appMuted, fontSize: 12))),
-        ]),
+        child: TextField(
+          textDirection: TextDirection.rtl,
+          onChanged: (String value) => setState(() => searchQuery = value),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: const Icon(Icons.search_rounded, color: appGold),
+            hintText: 'البحث عن سورة بالاسم أو الرقم',
+            hintStyle: const TextStyle(color: appMuted, fontSize: 12),
+            suffixIcon: searchQuery.isEmpty ? null : IconButton(
+              tooltip: 'مسح البحث',
+              onPressed: () => setState(() => searchQuery = ''),
+              icon: const Icon(Icons.close_rounded, color: appMuted),
+            ),
+          ),
+        ),
       ),
       const SizedBox(height: 20),
       Row(children: <Widget>[
         const Expanded(child: _SectionTitle(title: 'سور القرآن الكريم')),
-        Text('114 سورة', style: TextStyle(color: appGold.withValues(alpha: .9), fontSize: 12, fontWeight: FontWeight.w800)),
+        Text('${searchQuery.trim().isEmpty ? 114 : surahNames.where((String name) => name.contains(searchQuery.trim())).length} / 114 سورة', style: TextStyle(color: appGold.withValues(alpha: .9), fontSize: 12, fontWeight: FontWeight.w800)),
       ]),
       const SizedBox(height: 12),
       LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
@@ -646,7 +663,32 @@ class QuranDesignPage extends StatelessWidget {
           runSpacing: 10,
           children: <Widget>[
             for (int i = 0; i < surahNames.length; i++)
-              Container(
+              if (searchQuery.trim().isEmpty || surahNames[i].contains(searchQuery.trim()) || '${i + 1}'.contains(searchQuery.trim()))
+              InkWell(
+                borderRadius: BorderRadius.circular(15),
+                onTap: () => showModalBottomSheet<void>(
+                  context: context,
+                  backgroundColor: appSurface,
+                  showDragHandle: true,
+                  builder: (BuildContext sheetContext) => SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 28),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const Icon(Icons.menu_book_rounded, color: appGold, size: 34),
+                          const SizedBox(height: 12),
+                          Text(surahNames[i], style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: appGold)),
+                          const SizedBox(height: 6),
+                          Text('السورة رقم ${i + 1}', style: const TextStyle(color: appMuted, fontSize: 12)),
+                          const SizedBox(height: 14),
+                          const Text('تُضاف آيات السورة وخيارات القراءة والتلاوة في مرحلة المحتوى.', textAlign: TextAlign.center, style: TextStyle(color: appMuted, height: 1.8, fontSize: 13)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                child: Container(
                 width: width,
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
                 decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(15), border: Border.all(color: appSurfaceLight)),
@@ -662,6 +704,7 @@ class QuranDesignPage extends StatelessWidget {
                     style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800))),
                 ]),
               ),
+              ),
           ],
         );
       }),
@@ -673,15 +716,38 @@ class QuranDesignPage extends StatelessWidget {
         runSpacing: 9,
         children: <Widget>[
           for (int part = 1; part <= 30; part++)
-            Container(
-              width: 86,
-              padding: const EdgeInsets.symmetric(vertical: 13),
-              decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(13), border: Border.all(color: appSurfaceLight)),
-              child: Column(children: <Widget>[
-                const Icon(Icons.auto_stories_rounded, color: appGold, size: 20),
-                const SizedBox(height: 7),
-                Text('الجزء $part', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800)),
-              ]),
+            InkWell(
+              borderRadius: BorderRadius.circular(13),
+              onTap: () => showModalBottomSheet<void>(
+                context: context,
+                backgroundColor: appSurface,
+                showDragHandle: true,
+                builder: (BuildContext sheetContext) => SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Icon(Icons.auto_stories_rounded, color: appGold, size: 32),
+                        const SizedBox(height: 12),
+                        Text('الجزء $part', style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w900, color: appGold)),
+                        const SizedBox(height: 12),
+                        const Text('تُضاف بداية الجزء ونهايته ونص القراءة في مرحلة المحتوى.', textAlign: TextAlign.center, style: TextStyle(color: appMuted, height: 1.8, fontSize: 13)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              child: Container(
+                width: 86,
+                padding: const EdgeInsets.symmetric(vertical: 13),
+                decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(13), border: Border.all(color: appSurfaceLight)),
+                child: Column(children: <Widget>[
+                  const Icon(Icons.auto_stories_rounded, color: appGold, size: 20),
+                  const SizedBox(height: 7),
+                  Text('الجزء $part', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800)),
+                ]),
+              ),
             ),
         ],
       ),
