@@ -62,6 +62,8 @@ class _MainShellState extends State<MainShell> {
     _MenuItem('الصوتيات', Icons.headphones_rounded),
     _MenuItem('أسماء الله الحسنى', Icons.auto_awesome_rounded),
     _MenuItem('المفضلة', Icons.bookmark_rounded),
+    _MenuItem('عداد الركعات', Icons.countertops_rounded),
+    _MenuItem('سجدتا السهو', Icons.calculate_outlined),
     _MenuItem('الإعدادات', Icons.settings_rounded),
   ];
 
@@ -100,6 +102,8 @@ class _MainShellState extends State<MainShell> {
       const AudioDesignPage(),
       const AsmaDesignPage(),
       const FavoritesDesignPage(),
+      const SimplePage(icon: Icons.countertops_rounded, title: 'عداد الركعات', description: 'قسم مستقل لمتابعة الركعات أثناء الصلاة. ستُراجع طريقة الاستخدام والأحكام المرتبطة به قبل تفعيل الوظيفة.'),
+      const SimplePage(icon: Icons.calculate_outlined, title: 'سجدتا السهو', description: 'قسم مستقل للتذكير بأحكام سجدتي السهو. ستُراجع المسائل والمصادر الفقهية قبل تفعيل أي إرشاد.'),
       const SettingsDesignPage(),
     ];
 
@@ -1141,34 +1145,7 @@ class DhikrDesignPage extends StatelessWidget {
             const Icon(Icons.chevron_left_rounded, color: appMuted),
           ]),
         ),
-      const SizedBox(height: 22),
-      const _SectionTitle(title: 'أدوات الصلاة'),
-      const SizedBox(height: 10),
-      const Row(children: <Widget>[
-        Expanded(child: _UtilityPreviewCard(
-          icon: Icons.countertops_rounded,
-          title: 'عداد الركعات',
-          subtitle: 'متابعة عدد الركعات',
-          footer: '٠ / ٤ ركعات',
-        )),
-        const SizedBox(width: 10),
-        Expanded(child: _UtilityPreviewCard(
-          icon: Icons.calculate_outlined,
-          title: 'سجدتا السهو',
-          subtitle: 'مساعد تذكيري',
-          footer: 'واجهة إرشادية',
-        )),
-      ]),
-      const SizedBox(height: 12),
-      Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(17), border: Border.all(color: appSurfaceLight)),
-        child: const Row(children: <Widget>[
-          Icon(Icons.info_outline_rounded, color: appGold),
-          SizedBox(width: 10),
-          Expanded(child: Text('ستُراجع تفاصيل الأحكام والمراجع قبل تفعيل أي حاسبة فقهية.', style: TextStyle(color: appMuted, fontSize: 12, height: 1.7))),
-        ]),
-      ),
+
     ],
   );
 }
@@ -1951,7 +1928,9 @@ class HomePage extends StatelessWidget {
                 SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.headphones_rounded, title: 'الصوتيات', subtitle: 'تلاوات وأذان وأدعية', onTap: () => onOpen(9))),
                 SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.auto_awesome_rounded, title: 'أسماء الله', subtitle: 'الأسماء والمعاني', onTap: () => onOpen(10))),
                 SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.bookmark_border_rounded, title: 'المفضلة', subtitle: 'محفوظاتك', onTap: () => onOpen(11))),
-                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.settings_rounded, title: 'الإعدادات', subtitle: 'تخصيص التطبيق', onTap: () => onOpen(12))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.countertops_rounded, title: 'عداد الركعات', subtitle: 'قسم مستقل', onTap: () => onOpen(12))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.calculate_outlined, title: 'سجدتا السهو', subtitle: 'قسم مستقل', onTap: () => onOpen(13))),
+                SizedBox(width: itemWidth, child: _CategoryCard(icon: Icons.settings_rounded, title: 'الإعدادات', subtitle: 'تخصيص التطبيق', onTap: () => onOpen(14))),
               ],
             );
           },
