@@ -561,6 +561,33 @@ class HomePage extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(2, 4, 2, 18),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text('السلام عليكم ورحمة الله', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
+                    const SizedBox(height: 5),
+                    const Text('رفيقك اليومي للعبادة والطمأنينة', style: TextStyle(color: appMuted, fontSize: 12)),
+                  ],
+                ),
+              ),
+              Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: appSurface,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: appGold.withValues(alpha: .35)),
+                ),
+                child: const Icon(Icons.auto_awesome_rounded, color: appGold, size: 23),
+              ),
+            ],
+          ),
+        ),
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
