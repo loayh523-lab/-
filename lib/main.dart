@@ -194,9 +194,16 @@ class _MainShellState extends State<MainShell> {
           onPressed: () => scaffoldKey.currentState?.openDrawer(),
           icon: const Icon(Icons.cloud_outlined, color: appGold, size: 27),
         ),
-        title: const Text('مِيثَاقُ المُؤْمِنِ',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+        title: Text(selectedPage == 0 ? 'مِيثَاقُ المُؤْمِنِ' : menuItems[selectedPage].title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            tooltip: 'المفضلة',
+            onPressed: () => setState(() => selectedPage = 10),
+            icon: const Icon(Icons.bookmark_border_rounded, color: appGold),
+          ),
+        ],
       ),
       body: IndexedStack(index: selectedPage, children: pages),
     );
