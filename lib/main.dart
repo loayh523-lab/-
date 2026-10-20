@@ -160,6 +160,7 @@ class _MainShellState extends State<MainShell> {
               const SizedBox(height: 8),
               Expanded(
                 child: ListView(
+                  key: const Key('drawer-navigation-list'),
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   children: <Widget>[
                     for (int i = 0; i < menuItems.length; i++)
