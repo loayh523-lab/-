@@ -547,7 +547,6 @@ class _CategoryCard extends StatelessWidget {
               ),
               child: Icon(icon, color: appGold, size: 21),
             ),
-            const Spacer(),
             const SizedBox(height: 16),
             Text(title, maxLines: 1, overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900)),
