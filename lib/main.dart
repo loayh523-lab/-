@@ -446,10 +446,10 @@ class CalendarDesignPage extends StatelessWidget {
             Text('هجري', style: TextStyle(color: appMuted, fontSize: 12)),
           ]),
           const SizedBox(height: 18),
-          const Row(
+          Row(
             children: <Widget>[
               for (String day in <String>['س', 'ح', 'ن', 'ث', 'ر', 'خ', 'ج'])
-                Expanded(child: Center(child: Text(day, style: TextStyle(color: appGold, fontWeight: FontWeight.w800)))),
+                Expanded(child: Center(child: Text(day, style: const TextStyle(color: appGold, fontWeight: FontWeight.w800)))),
             ],
           ),
           const SizedBox(height: 12),
