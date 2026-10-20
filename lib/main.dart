@@ -105,10 +105,7 @@ class _MainShellState extends State<MainShell> {
         CatalogGroup('المواسم', <String>['شهر رمضان المبارك', 'جدول الإمساك والإفطار', 'الأعمال اليومية لشهر رمضان', 'الحج والعمرة', 'دليل زيارة الأربعين']),
         CatalogGroup('الأدلة', <String>['أحكام ومناسك الحج والعمرة', 'دليل الزائر', 'الإرشادات والخرائط']),
       ]),
-      const CatalogPage(title: 'الصوتيات', subtitle: 'مكتبة الاستماع', groups: <CatalogGroup>[
-        CatalogGroup('الصوتيات الدينية', <String>['تلاوات القرآن الكريم', 'الأذان', 'الأدعية الصوتية', 'الزيارات الصوتية', 'الأناشيد والابتهالات']),
-        CatalogGroup('قوائم الاستماع', <String>['المحفوظات الصوتية', 'آخر ما استمعت إليه']),
-      ]),
+      const AudioDesignPage(),
       const CatalogPage(title: 'أسماء الله الحسنى', subtitle: 'تعرّف إلى الأسماء ومعانيها', groups: <CatalogGroup>[
         CatalogGroup('الأسماء الحسنى', <String>['فهرس الأسماء الـ99', 'معاني الأسماء', 'الأسماء المفضلة']),
       ]),
@@ -288,6 +285,106 @@ class CatalogPage extends StatelessWidget {
       ],
     ],
   );
+}
+
+class AudioDesignPage extends StatelessWidget {
+  const AudioDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.headphones_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('الصوتيات', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('مكتبة التلاوات والأذان والأدعية والزيارات الصوتية.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'تصفّح المكتبة'),
+      const SizedBox(height: 12),
+      for (final _AudioCategory category in const <_AudioCategory>[
+        _AudioCategory(Icons.menu_book_rounded, 'تلاوات القرآن الكريم', 'تلاوات مرتلة وخيارات استماع'),
+        _AudioCategory(Icons.volume_up_rounded, 'الأذان', 'أصوات الأذان والتنبيهات'),
+        _AudioCategory(Icons.volunteer_activism_rounded, 'الأدعية والزيارات', 'استماع للأدعية والزيارات'),
+        _AudioCategory(Icons.music_note_rounded, 'الأناشيد والابتهالات', 'مكتبة روحانية متنوعة'),
+      ])
+        Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(18), border: Border.all(color: appSurfaceLight)),
+          child: Row(children: <Widget>[
+            Container(
+              width: 48, height: 48,
+              decoration: BoxDecoration(color: appSurfaceLight, borderRadius: BorderRadius.circular(15)),
+              child: Icon(category.icon, color: appGold, size: 23),
+            ),
+            const SizedBox(width: 13),
+            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text(category.title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
+              const SizedBox(height: 5),
+              Text(category.subtitle, style: const TextStyle(color: appMuted, fontSize: 11, height: 1.5)),
+            ])),
+            const Icon(Icons.chevron_left_rounded, color: appMuted),
+          ]),
+        ),
+      const SizedBox(height: 12),
+      Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: appSurface,
+          borderRadius: BorderRadius.circular(22),
+          border: Border.all(color: appGold.withValues(alpha: .25)),
+        ),
+        child: Column(children: <Widget>[
+          Container(
+            width: 76, height: 76,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: <Color>[Color(0xFF2B7657), appSurfaceLight]),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: const Icon(Icons.graphic_eq_rounded, color: appGold, size: 38),
+          ),
+          const SizedBox(height: 13),
+          const Text('لم يتم اختيار مقطع', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900)),
+          const SizedBox(height: 5),
+          const Text('سيظهر اسم المقطع هنا', style: TextStyle(color: appMuted, fontSize: 12)),
+          const SizedBox(height: 18),
+          const LinearProgressIndicator(value: 0, color: appGold, backgroundColor: appSurfaceLight),
+          const SizedBox(height: 12),
+          const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+            Text('00:00', style: TextStyle(color: appMuted, fontSize: 11)),
+            Text('--:--', style: TextStyle(color: appMuted, fontSize: 11)),
+          ]),
+          const SizedBox(height: 8),
+          const Icon(Icons.play_circle_fill_rounded, color: appMuted, size: 54),
+          const SizedBox(height: 4),
+          const Text('مشغل الصوتيات - تصميم أولي', style: TextStyle(color: appMuted, fontSize: 11)),
+        ]),
+      ),
+    ],
+  );
+}
+
+class _AudioCategory {
+  const _AudioCategory(this.icon, this.title, this.subtitle);
+  final IconData icon;
+  final String title;
+  final String subtitle;
 }
 
 class CalendarDesignPage extends StatelessWidget {
