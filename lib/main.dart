@@ -484,12 +484,6 @@ class _FeatureTile extends StatelessWidget {
       );
 }
 
-void _showNotReady(BuildContext context, String feature) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text('$feature قيد الإعداد وسيُضاف بمحتوى موثوق.')),
-  );
-}
-
 class SimplePage extends StatelessWidget {
   const SimplePage({
     super.key,
