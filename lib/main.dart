@@ -222,7 +222,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           decoration: BoxDecoration(
             color: appSurface,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: const BorderRadius.circular(20),
           ),
           child: Column(
             children: const <Widget>[
