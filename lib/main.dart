@@ -99,10 +99,7 @@ class _MainShellState extends State<MainShell> {
         CatalogGroup('الأذكار اليومية', <String>['أذكار الصباح', 'أذكار المساء', 'أذكار النوم', 'أذكار الاستيقاظ', 'أذكار الحفظ والحماية']),
         CatalogGroup('العدادات', <String>['التسبيح الإلكتروني', 'تسبيح الزهراء عليها السلام', 'عداد الركعات', 'حساب سجدتي السهو']),
       ]),
-      const CatalogPage(title: 'مواقيت الصلاة والقبلة', subtitle: 'مواقيت ووجهة الصلاة', groups: <CatalogGroup>[
-        CatalogGroup('الصلاة', <String>['مواقيت الصلوات الخمس', 'الصلاة القادمة والعد التنازلي', 'التعقيبات بعد الصلاة', 'أذان وتنبيهات الصلاة']),
-        CatalogGroup('الموقع والاتجاه', <String>['تحديد المدينة', 'اتجاه القبلة', 'طريقة حساب المواقيت']),
-      ]),
+      const PrayerDesignPage(),
       const CatalogPage(title: 'التقويم والأعمال', subtitle: 'الأيام والمناسبات', groups: <CatalogGroup>[
         CatalogGroup('التقويم', <String>['التقويم الهجري', 'المناسبات الإسلامية', 'مواليد ووفيات أهل البيت عليهم السلام']),
         CatalogGroup('الأعمال', <String>['أعمال الأيام', 'أعمال الأشهر', 'الليالي المباركة', 'أعمال يوم الجمعة']),
@@ -292,6 +289,105 @@ class CatalogPage extends StatelessWidget {
         ),
         const SizedBox(height: 22),
       ],
+    ],
+  );
+}
+
+class PrayerDesignPage extends StatelessWidget {
+  const PrayerDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Icon(Icons.explore_rounded, color: appGold, size: 30),
+          SizedBox(height: 14),
+          Text('الصلاة والقبلة', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+          SizedBox(height: 8),
+          Text('مواقيت الصلوات الخمس واتجاه القبلة في واجهة واحدة.',
+            style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Text('الصلاة القادمة', style: TextStyle(color: appGold, fontSize: 13)),
+          SizedBox(height: 8),
+          Text('تُحدَّد بعد ضبط الموقع', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+          SizedBox(height: 5),
+          Text('— : —  المتبقي للصلاة', style: TextStyle(color: appMuted, fontSize: 12)),
+        ]),
+      ),
+      const SizedBox(height: 22),
+      const _SectionTitle(title: 'مواقيت الصلاة'),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
+        child: const Column(children: <Widget>[
+          _PrayerRow(title: 'الفجر', icon: Icons.nightlight_round),
+          _PrayerRow(title: 'الشروق', icon: Icons.wb_twilight_rounded),
+          _PrayerRow(title: 'الظهر', icon: Icons.wb_sunny_outlined),
+          _PrayerRow(title: 'العصر', icon: Icons.sunny),
+          _PrayerRow(title: 'المغرب', icon: Icons.wb_twilight_rounded),
+          _PrayerRow(title: 'العشاء', icon: Icons.nights_stay_outlined, last: true),
+        ]),
+      ),
+      const SizedBox(height: 24),
+      const _SectionTitle(title: 'اتجاه القبلة'),
+      const SizedBox(height: 10),
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(22), border: Border.all(color: appSurfaceLight)),
+        child: Column(children: <Widget>[
+          const Text('يُعرض اتجاه القبلة بعد تفعيل الموقع والبوصلة',
+            textAlign: TextAlign.center, style: TextStyle(color: appMuted, fontSize: 12, height: 1.7)),
+          const SizedBox(height: 20),
+          Container(
+            width: 190, height: 190,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: appBackground, border: Border.all(color: appGold.withValues(alpha: .65), width: 2)),
+            child: Stack(alignment: Alignment.center, children: <Widget>[
+              Container(width: 148, height: 148, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: appSurfaceLight, width: 2))),
+              const Positioned(top: 10, child: Text('N', style: TextStyle(color: appMuted, fontWeight: FontWeight.w800))),
+              const Icon(Icons.navigation_rounded, color: appGold, size: 56),
+              const Positioned(bottom: 12, child: Text('QIBLA', style: TextStyle(color: appMuted, fontSize: 10, letterSpacing: 2))),
+            ]),
+          ),
+          const SizedBox(height: 18),
+          const Text('لم يتم تحديد المدينة', style: TextStyle(fontWeight: FontWeight.w800)),
+          const SizedBox(height: 6),
+          const Text('ستظهر المدينة ودرجة الاتجاه هنا', style: TextStyle(color: appMuted, fontSize: 12)),
+        ]),
+      ),
+      const SizedBox(height: 18),
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(18)),
+        child: const Row(children: <Widget>[
+          Icon(Icons.location_on_outlined, color: appGold, size: 25),
+          SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            Text('الموقع وطريقة الحساب', style: TextStyle(fontWeight: FontWeight.w800)),
+            SizedBox(height: 5),
+            Text('اختيار المدينة وضبط طريقة حساب المواقيت', style: TextStyle(color: appMuted, fontSize: 12)),
+          ])),
+          Icon(Icons.chevron_left_rounded, color: appMuted),
+        ]),
+      ),
     ],
   );
 }
