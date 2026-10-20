@@ -1175,7 +1175,7 @@ class DhikrDesignPage extends StatelessWidget {
       const SizedBox(height: 22),
       const _SectionTitle(title: 'أدوات الصلاة'),
       const SizedBox(height: 10),
-      Row(children: <Widget>[
+      const Row(children: <Widget>[
         Expanded(child: _UtilityPreviewCard(
           icon: Icons.countertops_rounded,
           title: 'عداد الركعات',
@@ -1454,7 +1454,7 @@ class CalendarDesignPage extends StatelessWidget {
       const SizedBox(height: 22),
       const _SectionTitle(title: 'اختصارات التقويم'),
       const SizedBox(height: 10),
-      Row(children: <Widget>[
+      const Row(children: <Widget>[
         Expanded(child: _UtilityPreviewCard(icon: Icons.cake_outlined, title: 'المواليد', subtitle: 'مناسبات الولادة', footer: 'عرض التقويم')),
         const SizedBox(width: 10),
         Expanded(child: _UtilityPreviewCard(icon: Icons.local_florist_outlined, title: 'الوفيات', subtitle: 'مناسبات العزاء', footer: 'عرض التقويم')),
@@ -1561,7 +1561,7 @@ class PrayerDesignPage extends StatelessWidget {
       const SizedBox(height: 22),
       const _SectionTitle(title: 'إعدادات المواقيت'),
       const SizedBox(height: 10),
-      Row(children: <Widget>[
+      const Row(children: <Widget>[
         Expanded(child: _UtilityPreviewCard(icon: Icons.location_on_outlined, title: 'الموقع', subtitle: 'المدينة أو GPS', footer: 'غير محدد')),
         const SizedBox(width: 10),
         Expanded(child: _UtilityPreviewCard(icon: Icons.tune_rounded, title: 'طريقة الحساب', subtitle: 'ضبط المواقيت', footer: 'تُختار لاحقاً')),
