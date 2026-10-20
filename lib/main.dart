@@ -161,8 +161,8 @@ class _MainShellState extends State<MainShell> {
       const AudioDesignPage(),
       const AsmaDesignPage(),
       const FavoritesDesignPage(),
-      const SimplePage(icon: Icons.countertops_rounded, title: 'عداد الركعات', description: 'قسم مستقل لمتابعة الركعات أثناء الصلاة. ستُراجع طريقة الاستخدام والأحكام المرتبطة به قبل تفعيل الوظيفة.'),
-      const SimplePage(icon: Icons.calculate_outlined, title: 'سجدتا السهو', description: 'قسم مستقل للتذكير بأحكام سجدتي السهو. ستُراجع المسائل والمصادر الفقهية قبل تفعيل أي إرشاد.'),
+      const RakatsCounterDesignPage(),
+      const SajdatSahwDesignPage(),
       const SettingsDesignPage(),
     ];
 
@@ -680,7 +680,7 @@ class AsmaDesignPage extends StatelessWidget {
             spacing: 10,
             runSpacing: 10,
             children: <Widget>[
-              for (int i = 0; i < previewNames.length; i++)
+              for (int i = 0; i < 99; i++)
                 Container(
                   width: width,
                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
@@ -692,10 +692,11 @@ class AsmaDesignPage extends StatelessWidget {
                   child: Column(children: <Widget>[
                     Text('${i + 1}', style: const TextStyle(color: appMuted, fontSize: 10)),
                     const SizedBox(height: 8),
-                    Text(previewNames[i], textAlign: TextAlign.center,
-                      style: const TextStyle(color: appGold, fontSize: 15, fontWeight: FontWeight.w900)),
+                    Text(i < previewNames.length ? previewNames[i] : 'الاسم لاحقاً',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: appGold, fontSize: 13, fontWeight: FontWeight.w900)),
                     const SizedBox(height: 7),
-                    const Text('المعنى الموثق', textAlign: TextAlign.center,
+                    const Text('المعنى لاحقاً', textAlign: TextAlign.center,
                       style: TextStyle(color: appMuted, fontSize: 9)),
                   ]),
                 ),
@@ -2393,6 +2394,233 @@ class _CategoryCard extends StatelessWidget {
       ),
     ),
   );
+}
+
+class RakatsCounterDesignPage extends StatelessWidget {
+  const RakatsCounterDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+              ),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.countertops_rounded, color: appGold, size: 30),
+                SizedBox(height: 14),
+                Text('عداد الركعات',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+                SizedBox(height: 8),
+                Text('واجهة مستقلة لمتابعة عدد الركعات أثناء الصلاة.',
+                    style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: appGold.withValues(alpha: .25)),
+            ),
+            child: Column(
+              children: <Widget>[
+                const Text('الركعة الحالية',
+                    style: TextStyle(color: appMuted, fontSize: 13)),
+                const SizedBox(height: 12),
+                Container(
+                  width: 160,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: appBackground,
+                    border: Border.all(color: appGold.withValues(alpha: .7), width: 2),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(color: appGreen.withValues(alpha: .12), blurRadius: 26),
+                    ],
+                  ),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('٠', style: TextStyle(fontSize: 54, fontWeight: FontWeight.w900)),
+                      SizedBox(height: 3),
+                      Text('ركعات', style: TextStyle(color: appMuted, fontSize: 12)),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: appSurfaceLight,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: appSurfaceLight),
+                        ),
+                        child: const Column(
+                          children: <Widget>[
+                            Icon(Icons.remove_rounded, color: appGold, size: 23),
+                            SizedBox(height: 5),
+                            Text('إنقاص', style: TextStyle(fontWeight: FontWeight.w800)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: appGreen.withValues(alpha: .16),
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: appGreen.withValues(alpha: .45)),
+                        ),
+                        child: const Column(
+                          children: <Widget>[
+                            Icon(Icons.add_rounded, color: appGold, size: 23),
+                            SizedBox(height: 5),
+                            Text('زيادة', style: TextStyle(fontWeight: FontWeight.w800)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const _SectionTitle(title: 'اختيار الصلاة'),
+          const SizedBox(height: 10),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              for (final String prayer in <String>['الفجر', 'الظهر', 'العصر', 'المغرب', 'العشاء'])
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: appSurface,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: appSurfaceLight),
+                  ),
+                  child: Text(prayer,
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: appSurfaceLight),
+            ),
+            child: const Row(
+              children: <Widget>[
+                Icon(Icons.info_outline_rounded, color: appGold),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'هذه معاينة شكلية؛ أزرار العدّ واختيار الصلاة ستُفعّل في مرحلة الخدمات.',
+                    style: TextStyle(color: appMuted, fontSize: 12, height: 1.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+}
+
+class SajdatSahwDesignPage extends StatelessWidget {
+  const SajdatSahwDesignPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => ListView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+              ),
+              border: Border.all(color: appGold.withValues(alpha: .28)),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.calculate_outlined, color: appGold, size: 30),
+                SizedBox(height: 14),
+                Text('سجدتا السهو',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
+                SizedBox(height: 8),
+                Text('قسم مستقل لتنظيم المسائل والرجوع إلى الحكم الموثق عند الحاجة.',
+                    style: TextStyle(color: Color(0xFFD2DFD6), height: 1.8, fontSize: 13)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: appSurface,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: appGold.withValues(alpha: .25)),
+            ),
+            child: const Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.verified_user_outlined, color: appGold, size: 22),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'لن يصدر التطبيق حكماً فقهياً قبل مراجعة المسألة ومصدرها وفق المرجع المعتمد.',
+                    style: TextStyle(color: appMuted, fontSize: 12, height: 1.8),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const _SectionTitle(title: 'موضوعات القسم'),
+          const SizedBox(height: 10),
+          for (final _SettingsOption option in const <_SettingsOption>[
+            _SettingsOption(Icons.menu_book_outlined, 'أحكام سجدتي السهو',
+                'عرض الحكم ومصدره بعد المراجعة الفقهية'),
+            _SettingsOption(Icons.help_outline_rounded, 'تحديد المسألة',
+                'ترتيب المعلومات اللازمة لفهم الحالة'),
+            _SettingsOption(Icons.bookmark_border_rounded, 'المسائل المحفوظة',
+                'الرجوع إلى المسائل التي تحفظها لاحقاً'),
+          ])
+            _AmaalPreviewTile(option: option),
+          const SizedBox(height: 8),
+          const Text(
+            'المحتوى الحالي تصميم للواجهة فقط، وليس فتوى أو إرشاداً عملياً.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: appMuted, fontSize: 11, height: 1.8),
+          ),
+        ],
+      );
 }
 
 class SimplePage extends StatelessWidget {
