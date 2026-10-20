@@ -202,6 +202,69 @@ class _MenuItem {
   final IconData icon;
 }
 
+class CatalogGroup {
+  const CatalogGroup(this.title, this.items);
+  final String title;
+  final List<String> items;
+}
+
+class CatalogPage extends StatelessWidget {
+  const CatalogPage({super.key, required this.title, required this.subtitle, required this.groups});
+  final String title;
+  final String subtitle;
+  final List<CatalogGroup> groups;
+
+  @override
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: <Color>[Color(0xFF205640), appSurface, Color(0xFF0C1E17)],
+          ),
+          border: Border.all(color: appGold.withValues(alpha: .28)),
+        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          const Text('مِيثَاقُ المُؤْمِنِ', style: TextStyle(color: appGold, fontSize: 12, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 14),
+          Text(title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900)),
+          const SizedBox(height: 8),
+          Text(subtitle, style: const TextStyle(color: Color(0xFFD2DFD6), height: 1.7, fontSize: 13)),
+          const SizedBox(height: 18),
+          Container(height: 3, width: 58, decoration: BoxDecoration(color: appGold, borderRadius: BorderRadius.circular(8))),
+        ]),
+      ),
+      const SizedBox(height: 24),
+      for (final CatalogGroup group in groups) ...<Widget>[
+        Text(group.title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
+        const SizedBox(height: 11),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+          decoration: BoxDecoration(color: appSurface, borderRadius: BorderRadius.circular(20), border: Border.all(color: appSurfaceLight)),
+          child: Column(children: <Widget>[
+            for (int i = 0; i < group.items.length; i++)
+              Container(
+                decoration: BoxDecoration(border: i == group.items.length - 1 ? null : const Border(bottom: BorderSide(color: appSurfaceLight, width: .8))),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  title: Text(group.items[i], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.5)),
+                  trailing: const Icon(Icons.chevron_left_rounded, color: appMuted),
+                  onTap: () {},
+                ),
+              ),
+          ]),
+        ),
+        const SizedBox(height: 22),
+      ],
+    ],
+  );
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
